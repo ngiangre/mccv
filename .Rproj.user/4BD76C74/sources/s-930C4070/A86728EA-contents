@@ -1,0 +1,11 @@
+---
+title: "Visualizing Biomarker Predictions from Monte Carlo Cross Validation Predictions"
+format: html
+editor: visual
+---
+
+# Introduction
+
+Monte Carlo Cross Validation (MCCV) is a predictive algorithm that combines prediction, cross validation, and statistical sampling. This notebook will showcase the performance of MCCV when predicting a binary classification by biomarkers of different distributions.
+
+## 

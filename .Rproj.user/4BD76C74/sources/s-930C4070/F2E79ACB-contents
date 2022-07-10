@@ -1,0 +1,36 @@
+---
+title: "Clinical machine learning using Monte Carlo Cross Validation (MCCV)"
+author: Nick Giangreco
+format:
+  revealjs:
+    incremental: true
+---
+
+## Outline
+
+::: {.incremental}
+1.  Wo am I?
+2.  What is Monte Carlo Cross Validation (MCCV)?
+3.  How well does MCCV learn?
+4.  Is MCCV open-source?
+5.  How does MCCV compare to using a t-test?
+:::
+
+## Nick Giangreco developed data mining and prediction methodologies at Columbia University {.smaller}
+
+- PhD in Systems Biology at Columbia University
+- Projects:
+   - Differential expression (RNA-Seq, Proteomics)
+   - Electronic Health Record (EHR) analysis
+   - Data mining 
+   - Biomarker prediction
+   
+## What is MCCV? {.smaller}
+
+Monte Carlo Cross Validation (MCCV) is a predictive algorithm that combines prediction, cross validation, and statistical sampling.
+
+## MCCV has been used as a prognostic tool to predict adverse outcomes in the future {.smaller}
+
+## MCCV has been implemented as a python package {.smaller}
+
+## MCCV determines a quantitative measure of prediction, compared to fold change and p-value cutoffs {.smaller}
