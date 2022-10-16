@@ -28,6 +28,8 @@ This software is released under the MIT license, which can be found in LICENSE i
 
 # Citation
 
+Giangreco, N.P., Lebreton, G., Restaino, S. et al. Alterations in the kallikrein-kinin system predict death after heart transplant. Sci Rep 12, 14167 (2022). [https://doi.org/10.1038/s41598-022-18573-2](https://doi.org/10.1038/s41598-022-18573-2)
+
 Giangreco et al. 2021. Plasma kallikrein predicts primary graft dysfunction after heart transplant. Journal of Heart and Lung Transplantation, 40(10), 1199-1211. [https://doi.org/10.1016/j.healun.2021.07.001](https://doi.org/10.1016/j.healun.2021.07.001).
 
 
