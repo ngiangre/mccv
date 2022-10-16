@@ -13,11 +13,31 @@ Based on the algorithm developed and implemented by Giangreco et al. (see refere
 # Installation
 
 ```
-...
 cd mccv/
 pip3 install .
 ```
 
+# Example Usage
+
+```
+#Data import
+import pandas as pd
+data = pd.read_csv('data/data.csv',index_col=0) # Feature column name is 'biomarker' and response column  name is 'status'
+
+
+#MCCV procedure
+import mccv
+mccv_obj = mccv.mccv(num_bootstraps=200)
+mccv_obj.set_X( data.loc[:,['biomarker']] )
+mccv_obj.set_Y( data.loc[:,['status']] )
+mccv_obj.run_mccv()
+mccv_obj.run_permuted_mccv()
+
+#Output
+mccv_obj.mccv_data # 4 element dictionary
+mccv_obj.mccv_permuted_data # 4 element dictionary
+
+```
 # Contribute
 
 Please do! Reach out to Nick directly (nick.giangreco@gmail.com), make an issue, or make a pull request.
