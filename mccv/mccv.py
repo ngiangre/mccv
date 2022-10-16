@@ -75,13 +75,13 @@ class mccv(object):
 		######
 		# make sure given metrics are in list and not one metric given as a string
 		if type(self.metrics)==str:
-			self.metrics = [x for x in [self.metrics] if x in metrics.SCORERS.keys()]
+			self.metrics = [x for x in [self.metrics] if x in metrics.get_scorer_names()]
 		if type(self.metrics)==list:
-			self.metrics = [x for x in self.metrics if x in metrics.SCORERS.keys()]
+			self.metrics = [x for x in self.metrics if x in metrics.get_scorer_names()]
 			if len(self.metrics)==0:
-				sys.exit('Please enter a metric name from sklearn.metrics.SCORERS.keys()')
+				sys.exit('Please enter a metric name from sklearn.metrics.get_scorer_names()')
 		if type(self.metrics) not in [str,list]:
-			sys.exit('Please enter a metric name from sklearn.metrics.SCORERS.keys()')
+			sys.exit('Please enter a metric name from sklearn.metrics.get_scorer_names()')
 		######
 
 	def set_X(self,X):
@@ -240,9 +240,9 @@ class mccv(object):
 			model_confs.append(conf)
 			#do prediction for each metric
 			for metric in self.metrics:
-				tmp['validation_'+metric] = metrics.SCORERS[metric](fitted,X_test,y_test)
+				tmp['validation_'+metric] = metrics.get_scorer(metric)(fitted,X_test,y_test)
 			model_retrained_fits[name] = fitted
-			dfs.append(tmp.query('fold==@top_fold').drop('fold',1))
+			dfs.append(tmp.query('fold==@top_fold').drop(columns='fold'))
 		return pd.concat(dfs,sort=True).reset_index(drop=True), model_retrained_fits, pd.concat(model_confs,sort=True)
 
 	def _permute_Y(self,seed):
@@ -331,9 +331,9 @@ class mccv(object):
 			model_confs.append(conf)
 			#do prediction for each metric
 			for metric in self.metrics:
-				tmp['validation_'+metric] = metrics.SCORERS[metric](fitted,X_test,y_test)
+				tmp['validation_'+metric] = metrics.get_scorer(metric)(fitted,X_test,y_test)
 			model_retrained_fits[name] = fitted
-			dfs.append(tmp.query('fold==@top_fold').drop('fold',1))
+			dfs.append(tmp.query('fold==@top_fold').drop(columns='fold'))
 		return pd.concat(dfs,sort=True).reset_index(drop=True), model_retrained_fits, pd.concat(model_confs,sort=True)
 
 	def _get_performance(self,lst):
@@ -419,7 +419,7 @@ class mccv(object):
 					x = (model_dat.
 						sample(n=model_dat.shape[0],replace=True,random_state=b)
 						)
-					score_vals.append([model,score,b,metrics.SCORERS[score]._score_func(x.y_true,x.y_proba)])
+					score_vals.append([model,score,b,metrics.get_scorer(score)._score_func(x.y_true,x.y_proba)])
 		return dat, pd.DataFrame(score_vals,columns=['model','metric','performance_bootstrap','value'])
 
 	def _bootstrap_of_function(self,func,params={}):
