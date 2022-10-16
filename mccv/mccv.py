@@ -86,6 +86,8 @@ class mccv(object):
 
 	def set_X(self,X):
 		"""
+		Set predictor data.
+
 		Set the data for the learning task (i.e. predictors)
 
 		Parameters
@@ -98,6 +100,8 @@ class mccv(object):
 
 	def set_Y(self,Y):
 		"""
+		Set response data.
+
 		Set the data for the learning task (i.e. response)
 
 		Parameters
@@ -110,6 +114,8 @@ class mccv(object):
 
 	def _set_models(self):
 		"""
+		Set model dictionary.
+
 		Set the machine learning models to  choose from
 
 		Parameters
@@ -157,6 +163,8 @@ class mccv(object):
 
 	def _get_models(self):
 		"""
+		Get model dictionary.
+
 		Get models based on model name(s) 
 
 		Parameters
@@ -171,6 +179,8 @@ class mccv(object):
 
 	def mccv(self,seed):
 		"""
+		Run MCCV routine.
+
 		Monte Carlo Cross Validation routine
 
 
@@ -237,7 +247,9 @@ class mccv(object):
 
 	def _permute_Y(self,seed):
 		"""
-		Shuffle Y values
+		Shuffle Y values.
+
+		This function permutes the response values in Y.
 
 		Parameters:
 		----------
@@ -256,6 +268,8 @@ class mccv(object):
 
 	def permuted_mccv(self,seed):
 		"""
+		Run MCCV permutation routine.
+
 		Monte Carlo Cross Validation permutation routine
 
 
@@ -324,6 +338,8 @@ class mccv(object):
 
 	def _get_performance(self,lst):
 		"""
+		Extract MCCV model performance.
+
 		Extract model performance statistics from mccv data
 
 		Parameters
@@ -341,6 +357,8 @@ class mccv(object):
 
 	def _model_feature_importances(self,boot_mods):
 		"""
+		Extract MCCV feature performance.
+
 		Extract feature performance statistics from mccv data (top performing model from cross validation)
 
 		Parameters
@@ -376,6 +394,8 @@ class mccv(object):
 
 	def _patient_predictions(self,lst,n=50):
 		"""
+		Extract MCCV patient performance.
+
 		Extract performance statistics from mccv patient data
 
 		Parameters
@@ -404,7 +424,7 @@ class mccv(object):
 
 	def _bootstrap_of_function(self,func,params={}):
 		"""
-		Parallel routine for computing MCCV
+		Run MCCV routines in parallel.
 
 		Parameters
 		----------
@@ -422,6 +442,8 @@ class mccv(object):
 
 	def run_mccv(self):
 		"""
+		Run MCCV procedure.
+
 		Wrapper to compute and extract statistics from MCCV routine
 
 		Parameters
@@ -446,7 +468,9 @@ class mccv(object):
 
 	def run_permuted_mccv(self):
 		"""
-		Wrapper to comnpute and extract statistics from MCCV permutation routine
+		Run MCCV permutation procedure.
+
+		Wrapper to compute and extract statistics from MCCV permutation routine
 
 		Parameters
 		----------
