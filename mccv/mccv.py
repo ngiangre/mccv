@@ -30,6 +30,12 @@ class mccv(object):
     seed: int
     	Number to set random number seed generators.
 
+	Returns
+	-------
+
+	Notes
+	-----
+
     Examples
     --------
 
@@ -38,8 +44,7 @@ class mccv(object):
 
 	def __init__(self,num_bootstraps = 1,n_jobs = 2):
 
-		######
-		# SET ARGUMENTS
+		#####SET ARGUMENTS####
 		self.X = None,
 		self.Y = None,
 		self.all_models = {}
@@ -52,10 +57,8 @@ class mccv(object):
 		self.return_train_score = True
 		self.return_estimator = True
 		self.seed = 0
-		######
 
-		######
-		# INSTANTIATE MODELS AND PREPARE MODELS TO BE USED
+		#####INSTANTIATE MODELS AND PREPARE MODELS TO BE USED####
 		self._set_models()
 		if type(self.model_names)==str:
 			self.model_names = [x for x in [self.model_names] if x in self.all_models]
@@ -66,14 +69,13 @@ class mccv(object):
 		######
 
 
-		######
-		# INSTANTIATE DATA OBJECT HOLDERS
+		#####INSTANTIATE DATA OBJECT HOLDERS####
 		self.mccv_data = None
 		self.mccv_permuted_data = None
 		######
 
-		######
-		# make sure given metrics are in list and not one metric given as a string
+		####Make sure given metrics are in list####
+		####and not one metric given as a string####
 		if type(self.metrics)==str:
 			self.metrics = [x for x in [self.metrics] if x in metrics.get_scorer_names()]
 		if type(self.metrics)==list:
@@ -82,7 +84,6 @@ class mccv(object):
 				sys.exit('Please enter a metric name from sklearn.metrics.get_scorer_names()')
 		if type(self.metrics) not in [str,list]:
 			sys.exit('Please enter a metric name from sklearn.metrics.get_scorer_names()')
-		######
 
 	def set_X(self,X):
 		"""
@@ -94,6 +95,18 @@ class mccv(object):
 		----------
 		X: dataframe
 			A pandas dataframe indexed by the unique observations and columns as the predictors
+
+		Returns
+		-------
+		NULL
+
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
 
 		"""
 		self.X = X
@@ -107,8 +120,20 @@ class mccv(object):
 		Parameters
 		----------
 		Y: dataframe
-			A pandas dataframe indexed by the unique observations and column as the response
+			A pandas dataframe indexed by the unique observations and column as the response		
 			
+		Returns
+		-------
+		NULL
+
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+	
 		"""
 		self.Y = Y
 
@@ -120,11 +145,23 @@ class mccv(object):
 
 		Parameters
 		----------
+		NULL
+
+		Returns
+		-------
+		NULL
+
+		Notes
+		-----
 		See sklearn guides for details on parameters:
 		- https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
 		- https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier
 		- https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
 		- https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html
+			
+		Examples
+		--------
+		NULL
 
 		"""
 
@@ -171,6 +208,18 @@ class mccv(object):
 		----------
 		NULL
 
+		Returns
+		-------
+		NULL
+
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+
 		"""
 		dict_ = {}
 		for m in self.model_names:
@@ -189,6 +238,17 @@ class mccv(object):
 		seed: int
 			Random seed for random number generator
 
+		Returns
+		-------
+		list
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+		
 		"""
 		# 1/ train and test split
 		Y = self.Y
@@ -261,6 +321,15 @@ class mccv(object):
 		------
 		arr_shuffle: pandas series
 			A shuffled Y
+		
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+		
 		"""
 		arr = shuffle(self.Y.values,random_state=seed)
 		arr_shuffle = (pd.Series(arr.reshape(1,-1)[0],index=self.Y.index))
@@ -278,6 +347,18 @@ class mccv(object):
 		seed: int
 			Random seed for random number generator
 
+		Returns
+		-------
+		list
+
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+	
 		"""
 		X = self.X.loc[self.Y.index]
 		Y_shuffle = self._permute_Y(seed=seed)
@@ -346,6 +427,19 @@ class mccv(object):
 		----------
 		lst: list
 			List of mccv data
+
+		Returns
+		-------
+		NULL
+
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+
 		"""
 		perf = (pd.
 				concat(lst,keys=range(len(lst))).
@@ -365,6 +459,19 @@ class mccv(object):
 		----------
 		lst: list
 			List of models used in mccv routine
+
+		Returns
+		-------
+		NULL
+
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+	
 		"""
 		dfs = []
 		X = self.X.copy()
@@ -404,6 +511,19 @@ class mccv(object):
 			List of mccv data
 		n: int
 			Number of bootstraps of validation data
+
+		Returns
+		-------
+		NULL
+
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+	
 		"""
 		dat = \
 		(pd.
@@ -431,7 +551,20 @@ class mccv(object):
 		func: function
 			Function to perform in parallel
 		params: dictionary
-			Dictionary of arguments for parallelized funcction. Currently not used.
+			Dictionary of arguments for parallelized function. Currently not used.
+
+		Returns
+		-------
+		NULL
+
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+
 		"""
 		if func==None:
 			return "Need function to bootstrap"
@@ -450,6 +583,18 @@ class mccv(object):
 		----------
 		NULL
 
+		Returns
+		-------
+		NULL
+
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+		
 		"""
 
 		lst = self._bootstrap_of_function(func=self.mccv)
@@ -474,6 +619,20 @@ class mccv(object):
 
 		Parameters
 		----------
+		NULL
+
+		Returns
+		-------
+		NULL
+
+		Notes
+		-----
+		NULL
+
+		Examples
+		--------
+		NULL
+		
 		"""
 
 		lst = self._bootstrap_of_function(func=self.permuted_mccv)
