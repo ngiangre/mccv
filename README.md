@@ -2,7 +2,7 @@
 
 Based on the algorithm developed and implemented by Giangreco et al. (see references).  
 
-<object data="docs/imgs/MCCV Prediction scheme.pdf" type="application/pdf"></object>
+<embed src="docs/imgs/MCCV Prediction scheme.pdf" type="application/pdf">
 
 # Objectives
 
