@@ -1,12 +1,11 @@
 import numpy as np
 import pandas as pd
-from sklearn import linear_model, model_selection, ensemble
+from sklearn import linear_model, ensemble
 from sklearn import svm
 from sklearn.base import clone
 from sklearn import metrics
 from sklearn.model_selection import cross_validate, train_test_split, StratifiedKFold
 from joblib import Parallel, delayed
-from sklearn.base import clone
 from sklearn.utils import shuffle
 import sys
 
@@ -24,11 +23,11 @@ class mccv(object):
 	test_size: float
 			Number between 0 and 1 for the proportinal size of the dataset for testing the trained machine learning model.
 
-    n_jobs: int
-    	Number of cores to be used for parallel processing.
+	n_jobs: int
+	Number of cores to be used for parallel processing.
 
-    seed: int
-    	Number to set random number seed generators.
+	seed: int
+		Number to set random number seed generators.
 
 	Returns
 	-------
@@ -36,8 +35,8 @@ class mccv(object):
 	Notes
 	-----
 
-    Examples
-    --------
+	Examples
+	--------
 
 
 	"""
@@ -254,9 +253,9 @@ class mccv(object):
 		Y = self.Y
 		X = self.X.loc[Y.index]
 		X_train, X_test, y_train, y_test = train_test_split(X,Y,
-	                                                            test_size=self.test_size,
-	                                                            random_state=seed,
-	                                                            shuffle=True)
+																test_size=self.test_size,
+																random_state=seed,
+																shuffle=True)
 		X_train = X_train.apply(lambda x : (x - min(x))/(max(x) - min(x)),axis=0)
 		X_test = X_test.apply(lambda x : (x - min(x))/(max(x) - min(x)),axis=0)
 		X_train[X_train.isna()]=0
@@ -274,8 +273,8 @@ class mccv(object):
 									n_jobs=1,return_train_score=self.return_train_score,
 									return_estimator=self.return_estimator)
 			tmp = pd.DataFrame({'fold' : range(self.cv_split),
-	                                    'model' : name},
-	                                   index=range(self.cv_split))
+										'model' : name},
+									   index=range(self.cv_split))
 			#populate scores in dataframe
 			cols = [k for k in fit.keys() if (k.find('test')+k.find('train'))==-1]
 			for col in cols:
@@ -292,11 +291,11 @@ class mccv(object):
 			f = top_model_key_vals['estimator']
 			fitted = clone(f).fit(X_train,y_train.values.reshape(1,-1)[0])
 			conf = pd.DataFrame({'y_true' : y_test.values.reshape(1,-1)[0],
-	                                     'y_pred' : fitted.predict(X_test),
-	                                     'y_proba' : fitted.predict_proba(X_test)[:,1],
-	                                     'bootstrap' : np.repeat(seed,len(y_test.index)),
-	                                     'model' : np.repeat(name,len(y_test.index))},
-	                                    index=y_test.index)
+										 'y_pred' : fitted.predict(X_test),
+										 'y_proba' : fitted.predict_proba(X_test)[:,1],
+										 'bootstrap' : np.repeat(seed,len(y_test.index)),
+										 'model' : np.repeat(name,len(y_test.index))},
+										index=y_test.index)
 			model_confs.append(conf)
 			#do prediction for each metric
 			for metric in self.metrics:
@@ -366,9 +365,9 @@ class mccv(object):
 		# 1/ train and test split
 		X = X_shuffle.loc[Y_shuffle.index]
 		X_train, X_test, y_train, y_test = train_test_split(X_shuffle,Y_shuffle,
-	                                                            test_size=self.test_size,
-	                                                            random_state=seed,
-	                                                            shuffle=True)
+																test_size=self.test_size,
+																random_state=seed,
+																shuffle=True)
 		X_train = X_train.apply(lambda x : (x - min(x))/(max(x) - min(x)),axis=0)
 		X_test = X_test.apply(lambda x : (x - min(x))/(max(x) - min(x)),axis=0)
 		X_train[X_train.isna()]=0
@@ -386,8 +385,8 @@ class mccv(object):
 									n_jobs=1,return_train_score=self.return_train_score,
 									return_estimator=self.return_estimator)
 			tmp = pd.DataFrame({'fold' : range(self.cv_split),
-	                                    'model' : name},
-	                                   index=range(self.cv_split))
+										'model' : name},
+									   index=range(self.cv_split))
 			#populate scores in dataframe
 			cols = [k for k in fit.keys() if (k.find('test')+k.find('train'))==-1]
 			for col in cols:
@@ -404,11 +403,11 @@ class mccv(object):
 			f = top_model_key_vals['estimator']
 			fitted = clone(f).fit(X_train,y_train.values.reshape(1,-1)[0])
 			conf = pd.DataFrame({'y_true' : y_test.values.reshape(1,-1)[0],
-	                                     'y_pred' : fitted.predict(X_test),
-	                                     'y_proba' : fitted.predict_proba(X_test)[:,1],
-	                                     'bootstrap' : np.repeat(seed,len(y_test.index)),
-	                                     'model' : np.repeat(name,len(y_test.index))},
-	                                    index=y_test.index)
+										 'y_pred' : fitted.predict(X_test),
+										 'y_proba' : fitted.predict_proba(X_test)[:,1],
+										 'bootstrap' : np.repeat(seed,len(y_test.index)),
+										 'model' : np.repeat(name,len(y_test.index))},
+										index=y_test.index)
 			model_confs.append(conf)
 			#do prediction for each metric
 			for metric in self.metrics:
