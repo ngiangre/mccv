@@ -67,8 +67,20 @@ reticulate::py$mccv_obj$mccv_data$`Patient Predictions` %>%
 
 ```
 
-```{r}
+# Continuous response
 
-reticulate::py$mccv_obj$mccv_permuted_data
+```{python}
+#| echo: true
+#| 
+import pandas as pd
+data = pd.read_csv('data/lm_data.csv',index_col=0) # Feature column name is 'biomarker' and response column  name is 'status'
+
+import mccv
+mccv_obj = mccv.mccv(num_bootstraps=200)
+mccv_obj.model_names = ['Linear Regression']
+mccv_obj.metrics = ['r2']
+mccv_obj.set_X( data.loc[:,['biomarker']] )
+mccv_obj.set_Y( data.loc[:,['status']] )
+mccv_obj.run_mccv()
 
 ```
