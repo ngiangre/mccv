@@ -360,6 +360,197 @@
 </section>
 <section id="mccv-determines-a-quantitative-measure-of-prediction-compared-to-fold-change-and-p-value-cutoffs" class="slide level2 smaller">
 <h2>MCCV determines a quantitative measure of prediction, compared to fold change and p-value cutoffs</h2>
+</section>
+<section id="mccv-example" class="slide level2">
+<h2>MCCV example</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>{'Model Learning':      bootstrap                model  ...  train_roc_auc  validation_roc_auc
+0            0  Logistic Regression  ...       0.529453            0.611111
+1            1  Logistic Regression  ...       0.515235            0.732143
+2            2  Logistic Regression  ...       0.543056            0.400000
+3            3  Logistic Regression  ...       0.519728            0.727273
+4            4  Logistic Regression  ...       0.554054            0.574074
+..         ...                  ...  ...            ...                 ...
+195        195  Logistic Regression  ...       0.516938            0.780000
+196        196  Logistic Regression  ...       0.509695            0.732143
+197        197  Logistic Regression  ...       0.528455            0.520000
+198        198  Logistic Regression  ...       0.554709            0.553571
+199        199  Logistic Regression  ...       0.518919            0.685185
+
+[200 rows x 5 columns], 'Feature Importance':     bootstrap    feature  importance                model
+0           0  biomarker    1.010712  Logistic Regression
+1           0  Intercept   -0.599959  Logistic Regression
+0           1  biomarker    0.509404  Logistic Regression
+1           1  Intercept   -0.226465  Logistic Regression
+0           2  biomarker    1.591529  Logistic Regression
+..        ...        ...         ...                  ...
+1         197  Intercept   -0.523644  Logistic Regression
+0         198  biomarker    0.813582  Logistic Regression
+1         198  Intercept   -0.372015  Logistic Regression
+0         199  biomarker    0.555816  Logistic Regression
+1         199  Intercept   -0.206872  Logistic Regression
+
+[400 rows x 4 columns], 'Patient Predictions':      bootstrap                model  y_pred   y_proba  y_true
+obs                                                          
+27           0  Logistic Regression       0  0.384426       1
+87           0  Logistic Regression       1  0.601268       0
+3            0  Logistic Regression       0  0.401035       0
+56           0  Logistic Regression       1  0.512297       1
+76           0  Logistic Regression       0  0.392718       0
+..         ...                  ...     ...       ...     ...
+66         199  Logistic Regression       1  0.505867       0
+80         199  Logistic Regression       1  0.543330       0
+74         199  Logistic Regression       0  0.448466       0
+90         199  Logistic Regression       0  0.470251       0
+56         199  Logistic Regression       1  0.537494       1
+
+[3000 rows x 5 columns], 'Performance':                   model   metric  performance_bootstrap     value
+0   Logistic Regression  roc_auc                      0  0.468092
+1   Logistic Regression  roc_auc                      1  0.467906
+2   Logistic Regression  roc_auc                      2  0.481271
+3   Logistic Regression  roc_auc                      3  0.481514
+4   Logistic Regression  roc_auc                      4  0.476277
+5   Logistic Regression  roc_auc                      5  0.469629
+6   Logistic Regression  roc_auc                      6  0.471133
+7   Logistic Regression  roc_auc                      7  0.459727
+8   Logistic Regression  roc_auc                      8  0.467018
+9   Logistic Regression  roc_auc                      9  0.464710
+10  Logistic Regression  roc_auc                     10  0.471300
+11  Logistic Regression  roc_auc                     11  0.465447
+12  Logistic Regression  roc_auc                     12  0.489816
+13  Logistic Regression  roc_auc                     13  0.472448
+14  Logistic Regression  roc_auc                     14  0.475615
+15  Logistic Regression  roc_auc                     15  0.478855
+16  Logistic Regression  roc_auc                     16  0.471874
+17  Logistic Regression  roc_auc                     17  0.483538
+18  Logistic Regression  roc_auc                     18  0.481881
+19  Logistic Regression  roc_auc                     19  0.471614
+20  Logistic Regression  roc_auc                     20  0.481806
+21  Logistic Regression  roc_auc                     21  0.478631
+22  Logistic Regression  roc_auc                     22  0.469982
+23  Logistic Regression  roc_auc                     23  0.472931
+24  Logistic Regression  roc_auc                     24  0.488063
+25  Logistic Regression  roc_auc                     25  0.487935
+26  Logistic Regression  roc_auc                     26  0.467816
+27  Logistic Regression  roc_auc                     27  0.464931
+28  Logistic Regression  roc_auc                     28  0.489079
+29  Logistic Regression  roc_auc                     29  0.463738
+30  Logistic Regression  roc_auc                     30  0.468598
+31  Logistic Regression  roc_auc                     31  0.463255
+32  Logistic Regression  roc_auc                     32  0.483263
+33  Logistic Regression  roc_auc                     33  0.474326
+34  Logistic Regression  roc_auc                     34  0.491164
+35  Logistic Regression  roc_auc                     35  0.465237
+36  Logistic Regression  roc_auc                     36  0.492535
+37  Logistic Regression  roc_auc                     37  0.478691
+38  Logistic Regression  roc_auc                     38  0.456624
+39  Logistic Regression  roc_auc                     39  0.478402
+40  Logistic Regression  roc_auc                     40  0.456327
+41  Logistic Regression  roc_auc                     41  0.475298
+42  Logistic Regression  roc_auc                     42  0.467328
+43  Logistic Regression  roc_auc                     43  0.481125
+44  Logistic Regression  roc_auc                     44  0.470650
+45  Logistic Regression  roc_auc                     45  0.454925
+46  Logistic Regression  roc_auc                     46  0.494880
+47  Logistic Regression  roc_auc                     47  0.482867
+48  Logistic Regression  roc_auc                     48  0.478002
+49  Logistic Regression  roc_auc                     49  0.475947}</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'Model Learning':      bootstrap                model  ...  train_roc_auc  validation_roc_auc
+0            0  Logistic Regression  ...       0.506233            0.642857
+1            1  Logistic Regression  ...       0.492030            0.703704
+2            2  Logistic Regression  ...       0.510135            0.537037
+3            3  Logistic Regression  ...       0.506944            0.703704
+4            4  Logistic Regression  ...       0.589547            0.340909
+..         ...                  ...  ...            ...                 ...
+195        195  Logistic Regression  ...       0.551957            0.660714
+196        196  Logistic Regression  ...       0.545014            0.464286
+197        197  Logistic Regression  ...       0.524238            0.482143
+198        198  Logistic Regression  ...       0.512838            0.685185
+199        199  Logistic Regression  ...       0.495946            0.648148
+
+[200 rows x 5 columns], 'Feature Importance':     bootstrap    feature  importance                model
+0           0  biomarker   -0.195845  Logistic Regression
+1           0  Intercept    0.078774  Logistic Regression
+0           1  biomarker   -0.630019  Logistic Regression
+1           1  Intercept    0.238267  Logistic Regression
+0           2  biomarker    0.165976  Logistic Regression
+..        ...        ...         ...                  ...
+1         197  Intercept   -0.567297  Logistic Regression
+0         198  biomarker   -0.660244  Logistic Regression
+1         198  Intercept    0.392280  Logistic Regression
+0         199  biomarker    0.150763  Logistic Regression
+1         199  Intercept   -0.004713  Logistic Regression
+
+[400 rows x 4 columns], 'Patient Predictions':      bootstrap                model  y_pred   y_proba  y_true
+obs                                                          
+27           0  Logistic Regression       1  0.513434       1
+87           0  Logistic Regression       0  0.470765       0
+3            0  Logistic Regression       1  0.510061       0
+56           0  Logistic Regression       0  0.488249       1
+76           0  Logistic Regression       1  0.511744       1
+..         ...                  ...     ...       ...     ...
+66         199  Logistic Regression       1  0.514437       0
+80         199  Logistic Regression       1  0.524613       1
+74         199  Logistic Regression       0  0.498822       0
+90         199  Logistic Regression       1  0.504771       0
+56         199  Logistic Regression       1  0.523023       1
+
+[3000 rows x 5 columns], 'Performance':                   model   metric  performance_bootstrap     value
+0   Logistic Regression  roc_auc                      0  0.439984
+1   Logistic Regression  roc_auc                      1  0.442234
+2   Logistic Regression  roc_auc                      2  0.449432
+3   Logistic Regression  roc_auc                      3  0.439897
+4   Logistic Regression  roc_auc                      4  0.449552
+5   Logistic Regression  roc_auc                      5  0.443527
+6   Logistic Regression  roc_auc                      6  0.438629
+7   Logistic Regression  roc_auc                      7  0.458009
+8   Logistic Regression  roc_auc                      8  0.452695
+9   Logistic Regression  roc_auc                      9  0.440126
+10  Logistic Regression  roc_auc                     10  0.439942
+11  Logistic Regression  roc_auc                     11  0.458530
+12  Logistic Regression  roc_auc                     12  0.459699
+13  Logistic Regression  roc_auc                     13  0.449055
+14  Logistic Regression  roc_auc                     14  0.476226
+15  Logistic Regression  roc_auc                     15  0.454151
+16  Logistic Regression  roc_auc                     16  0.450677
+17  Logistic Regression  roc_auc                     17  0.449936
+18  Logistic Regression  roc_auc                     18  0.448082
+19  Logistic Regression  roc_auc                     19  0.447481
+20  Logistic Regression  roc_auc                     20  0.460230
+21  Logistic Regression  roc_auc                     21  0.446168
+22  Logistic Regression  roc_auc                     22  0.451772
+23  Logistic Regression  roc_auc                     23  0.431721
+24  Logistic Regression  roc_auc                     24  0.468949
+25  Logistic Regression  roc_auc                     25  0.460362
+26  Logistic Regression  roc_auc                     26  0.445353
+27  Logistic Regression  roc_auc                     27  0.438188
+28  Logistic Regression  roc_auc                     28  0.446187
+29  Logistic Regression  roc_auc                     29  0.436346
+30  Logistic Regression  roc_auc                     30  0.440731
+31  Logistic Regression  roc_auc                     31  0.438225
+32  Logistic Regression  roc_auc                     32  0.427395
+33  Logistic Regression  roc_auc                     33  0.460560
+34  Logistic Regression  roc_auc                     34  0.454429
+35  Logistic Regression  roc_auc                     35  0.444242
+36  Logistic Regression  roc_auc                     36  0.453461
+37  Logistic Regression  roc_auc                     37  0.450032
+38  Logistic Regression  roc_auc                     38  0.432782
+39  Logistic Regression  roc_auc                     39  0.453701
+40  Logistic Regression  roc_auc                     40  0.446694
+41  Logistic Regression  roc_auc                     41  0.448676
+42  Logistic Regression  roc_auc                     42  0.438595
+43  Logistic Regression  roc_auc                     43  0.432655
+44  Logistic Regression  roc_auc                     44  0.417786
+45  Logistic Regression  roc_auc                     45  0.455148
+46  Logistic Regression  roc_auc                     46  0.440960
+47  Logistic Regression  roc_auc                     47  0.428677
+48  Logistic Regression  roc_auc                     48  0.455824
+49  Logistic Regression  roc_auc                     49  0.474773}</code></pre>
+</div>
+</div>
 <div class="footer footer-default">
 
 </div>
@@ -575,6 +766,48 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

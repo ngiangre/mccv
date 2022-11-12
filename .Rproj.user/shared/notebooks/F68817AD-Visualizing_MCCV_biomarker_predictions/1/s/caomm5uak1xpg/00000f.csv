@@ -1,7 +1,0 @@
-"0","dists = c(""normal"",""t"",""beta"")"
-"0","mccv_data = lapply(dists,function(dist){"
-"0","    tmp = fread(paste0(""data/mccv_50subjects_100parameters_"",dist,""_data.csv""))"
-"0","    colnames(tmp)[1] = ""subject"""
-"0","    tmp"
-"0","})"
-"0","names(mccv_data) <- dists"

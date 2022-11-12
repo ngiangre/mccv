@@ -172,6 +172,9 @@ class mccv(object):
         """
 
         self.all_models = {
+            "Linear Regression" : linear_model.LinearRegression(
+                n_jobs = self.n_jobs
+            ),
             "Logistic Regression": linear_model.LogisticRegression(
                 C=1000000,
                 penalty="l2",
