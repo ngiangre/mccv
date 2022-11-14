@@ -30,7 +30,19 @@ engine: knitr
 
 Monte Carlo Cross Validation (MCCV) is a predictive algorithm that combines prediction, cross validation, and statistical sampling.
 
+## MCCV was designed for answering predictive questions
+
+::: {.incremental}
+1. Can a biomarker predict an outcome in the future?
+2. Can we teach an ML model to predict a future outcome?
+3. What is the expected future outcome from a biomarker in a heterogeneous population?
+4. At what interval of a biomarker distribution can we predict a future outcome well and not well?
+5. Does a covariate confound prediction by a biomarker?
+:::
+
 ## MCCV has been used as a prognostic tool to predict adverse outcomes in the future {.smaller}
+
+
 
 ## MCCV has been implemented as a python package {.smaller}
 
@@ -64,23 +76,5 @@ library(ggplot2)
 reticulate::py$mccv_obj$mccv_data$`Patient Predictions` %>% 
     ggplot(aes(factor(y_true),y_proba))  +
     geom_boxplot()
-
-```
-
-# Continuous response
-
-```{python}
-#| echo: true
-#| 
-import pandas as pd
-data = pd.read_csv('data/lm_data.csv',index_col=0) # Feature column name is 'biomarker' and response column  name is 'status'
-
-import mccv
-mccv_obj = mccv.mccv(num_bootstraps=200)
-mccv_obj.model_names = ['Linear Regression']
-mccv_obj.metrics = ['r2']
-mccv_obj.set_X( data.loc[:,['biomarker']] )
-mccv_obj.set_Y( data.loc[:,['status']] )
-mccv_obj.run_mccv()
 
 ```
