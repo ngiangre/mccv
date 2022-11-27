@@ -73,6 +73,7 @@ mccv_obj.run_permuted_mccv()
 
 ```{r}
 library(ggplot2)
+library(dplyr)
 reticulate::py$mccv_obj$mccv_data$`Patient Predictions` %>% 
     ggplot(aes(factor(y_true),y_proba))  +
     geom_boxplot()
