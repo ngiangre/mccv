@@ -1,3 +1,4 @@
+.vscode/
 .DS_Store
 data/
 
@@ -154,6 +155,7 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
 .Rproj.user
 
 # Created by https://www.toptal.com/developers/gitignore/api/r
