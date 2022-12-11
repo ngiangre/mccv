@@ -8,7 +8,7 @@ title: "Monte Carlo Cross Validation"
 
 Binary and Multi-classification algorithm implemented by Giangreco et al. (see references)
 
-![](docs/imgs/MCCV_prediction_scheme.png)
+![](MCCV_prediction_scheme.png)
 
 # Objectives of this project
 
@@ -35,14 +35,7 @@ python3 -m pip install .
 ```{python}
 import pandas as pd
 data = pd.read_csv('data/data.csv',index_col=0) # Feature column name is 'biomarker' and response column  name is 'status'
-```
-
-```{python}
-data.describe()
-```
-
-```{python}
-data.groupby('status').describe()
+data.head()
 ```
 
 ```{python}
@@ -54,39 +47,42 @@ mccv_obj.run_mccv()
 mccv_obj.run_permuted_mccv()
 
 #Output
-#mccv_obj.mccv_data # 4 element dictionary
-#mccv_obj.mccv_permuted_data # 4 element dictionary
+for n in mccv_obj.mccv_data:
+    print(n)
+    mccv_obj.mccv_data[n].head()
+for n in mccv_obj.mccv_permuted_data:
+    print(n)
+    mccv_obj.mccv_permuted_data[n].head()
 ```
 
 # R
 
 ```{r}
-#install.packages("tidyverse")
-library(tidyverse)
-data <- read_csv("data/data.csv",col_types = c("iid"))
-data
+if(!requireNamespace("readr")){install.packages("readr")}
+library(readr)
+data <- read_csv("data/data.csv",col_types = c("iid")) #set obs as integer, status as integer, and biomarker as double
+head(data)
 ```
 
 ```{r}
-summary(data)
-```
-
-```{r}
-summary(data$biomarker[data$status==0])
-```
-
-```{r}
-summary(data$biomarker[data$status==1])
-```
-
-```{r}
+if(!requireNamespace("reticulate")){install.packages("reticulate")}
 mccv = reticulate::import('mccv')
 mccv_obj = mccv$mccv(num_bootstraps = as.integer(200))
-mccv_obj$set_X(data[,c('biomarker')])
-mccv_obj$set_Y(data[,c('status')])
+
+X = reticulate::r_to_py(data[,c('obs','biomarker')])
+X = X$set_index(reticulate::r_to_py('obs'))
+
+y = reticulate::r_to_py(data[,c('obs','status')])
+y = y$set_index(reticulate::r_to_py('obs'))
+
+mccv_obj$set_X(X)
+mccv_obj$set_Y(y)
 mccv_obj$run_mccv()
 mccv_obj$run_permuted_mccv()
-lapply(mccv_obj$mccv_data,tibble)
+
+#Output
+lapply(mccv_obj$mccv_data,head)
+lapply(mccv_obj$mccv_permuted_data,head)
 ```
 
 :::

@@ -8,7 +8,7 @@ Monte Carlo Cross Validation
 Binary and Multi-classification algorithm implemented by Giangreco et
 al. (see references)
 
-![](docs/imgs/MCCV_prediction_scheme.png)
+![](MCCV_prediction_scheme.png)
 
 # Objectives of this project
 
@@ -34,33 +34,16 @@ al. (see references)
 ``` python
 import pandas as pd
 data = pd.read_csv('data/data.csv',index_col=0) # Feature column name is 'biomarker' and response column  name is 'status'
+data.head()
 ```
 
-``` python
-data.describe()
-```
-
-               status   biomarker
-    count  100.000000  100.000000
-    mean     0.500000    0.095906
-    std      0.502519    1.127545
-    min      0.000000   -2.163797
-    25%      0.000000   -0.621123
-    50%      0.500000    0.199851
-    75%      1.000000    0.837820
-    max      1.000000    2.338124
-
-``` python
-data.groupby('status').describe()
-```
-
-           biomarker                      ...                              
-               count      mean       std  ...       50%       75%       max
-    status                                ...                              
-    0           50.0 -0.020558  1.130326  ...  0.081415  0.815223  2.202075
-    1           50.0  0.212370  1.123985  ...  0.360705  0.833713  2.338124
-
-    [2 rows x 8 columns]
+         status  biomarker
+    obs                   
+    1         0   1.665731
+    2         0  -0.875837
+    3         0  -1.391374
+    4         0  -0.297352
+    5         1   0.189857
 
 ``` python
 import mccv
@@ -71,80 +54,123 @@ mccv_obj.run_mccv()
 mccv_obj.run_permuted_mccv()
 
 #Output
-#mccv_obj.mccv_data # 4 element dictionary
-#mccv_obj.mccv_permuted_data # 4 element dictionary
+for n in mccv_obj.mccv_data:
+    print(n)
+    mccv_obj.mccv_data[n].head()
 ```
+
+    Model Learning
+       bootstrap                model  ...  train_roc_auc  validation_roc_auc
+    0          0  Logistic Regression  ...       0.529453            0.611111
+    1          1  Logistic Regression  ...       0.515235            0.732143
+    2          2  Logistic Regression  ...       0.543056            0.400000
+    3          3  Logistic Regression  ...       0.519728            0.727273
+    4          4  Logistic Regression  ...       0.554054            0.574074
+
+    [5 rows x 5 columns]
+    Feature Importance
+       bootstrap    feature  importance                model
+    0          0  biomarker    1.010712  Logistic Regression
+    1          0  Intercept   -0.599959  Logistic Regression
+    0          1  biomarker    0.509404  Logistic Regression
+    1          1  Intercept   -0.226465  Logistic Regression
+    0          2  biomarker    1.591529  Logistic Regression
+    Patient Predictions
+         bootstrap                model  y_pred   y_proba  y_true
+    obs                                                          
+    27           0  Logistic Regression       0  0.384426       1
+    87           0  Logistic Regression       1  0.601268       0
+    3            0  Logistic Regression       0  0.401035       0
+    56           0  Logistic Regression       1  0.512297       1
+    76           0  Logistic Regression       0  0.392718       0
+    Performance
+                     model   metric  performance_bootstrap     value
+    0  Logistic Regression  roc_auc                      0  0.468092
+    1  Logistic Regression  roc_auc                      1  0.467906
+    2  Logistic Regression  roc_auc                      2  0.481271
+    3  Logistic Regression  roc_auc                      3  0.481514
+    4  Logistic Regression  roc_auc                      4  0.476277
+
+``` python
+for n in mccv_obj.mccv_permuted_data:
+    print(n)
+    mccv_obj.mccv_permuted_data[n].head()
+```
+
+    Model Learning
+       bootstrap                model  ...  train_roc_auc  validation_roc_auc
+    0          0  Logistic Regression  ...       0.506233            0.642857
+    1          1  Logistic Regression  ...       0.492030            0.703704
+    2          2  Logistic Regression  ...       0.510135            0.537037
+    3          3  Logistic Regression  ...       0.506944            0.703704
+    4          4  Logistic Regression  ...       0.589547            0.340909
+
+    [5 rows x 5 columns]
+    Feature Importance
+       bootstrap    feature  importance                model
+    0          0  biomarker   -0.195845  Logistic Regression
+    1          0  Intercept    0.078774  Logistic Regression
+    0          1  biomarker   -0.630019  Logistic Regression
+    1          1  Intercept    0.238267  Logistic Regression
+    0          2  biomarker    0.165976  Logistic Regression
+    Patient Predictions
+         bootstrap                model  y_pred   y_proba  y_true
+    obs                                                          
+    27           0  Logistic Regression       1  0.513434       1
+    87           0  Logistic Regression       0  0.470765       0
+    3            0  Logistic Regression       1  0.510061       0
+    56           0  Logistic Regression       0  0.488249       1
+    76           0  Logistic Regression       1  0.511744       1
+    Performance
+                     model   metric  performance_bootstrap     value
+    0  Logistic Regression  roc_auc                      0  0.439984
+    1  Logistic Regression  roc_auc                      1  0.442234
+    2  Logistic Regression  roc_auc                      2  0.449432
+    3  Logistic Regression  roc_auc                      3  0.439897
+    4  Logistic Regression  roc_auc                      4  0.449552
 
 # R
 
 ``` r
-#install.packages("tidyverse")
-library(tidyverse)
+if(!requireNamespace("readr")){install.packages("readr")}
 ```
 
-    ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-    ✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
-    ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-    ✔ tidyr   1.2.1      ✔ stringr 1.5.0 
-    ✔ readr   2.1.3      ✔ forcats 0.5.2 
-    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ✖ dplyr::filter() masks stats::filter()
-    ✖ dplyr::lag()    masks stats::lag()
+    Loading required namespace: readr
 
 ``` r
-data <- read_csv("data/data.csv",col_types = c("iid"))
-data
+library(readr)
+data <- read_csv("data/data.csv",col_types = c("iid")) #set obs as integer, status as integer, and biomarker as double
+head(data)
 ```
 
-    # A tibble: 100 × 3
-         obs status biomarker
-       <int>  <int>     <dbl>
-     1     1      0     1.67 
-     2     2      0    -0.876
-     3     3      0    -1.39 
-     4     4      0    -0.297
-     5     5      1     0.190
-     6     6      0     2.20 
-     7     7      1    -0.121
-     8     8      1     0.896
-     9     9      1     0.153
-    10    10      1     0.259
-    # … with 90 more rows
+    # A tibble: 6 × 3
+        obs status biomarker
+      <int>  <int>     <dbl>
+    1     1      0     1.67 
+    2     2      0    -0.876
+    3     3      0    -1.39 
+    4     4      0    -0.297
+    5     5      1     0.190
+    6     6      0     2.20 
 
 ``` r
-summary(data)
-```
-
-          obs             status      biomarker       
-     Min.   :  1.00   Min.   :0.0   Min.   :-2.16380  
-     1st Qu.: 25.75   1st Qu.:0.0   1st Qu.:-0.62112  
-     Median : 50.50   Median :0.5   Median : 0.19985  
-     Mean   : 50.50   Mean   :0.5   Mean   : 0.09591  
-     3rd Qu.: 75.25   3rd Qu.:1.0   3rd Qu.: 0.83782  
-     Max.   :100.00   Max.   :1.0   Max.   : 2.33812  
-
-``` r
-summary(data$biomarker[data$status==0])
-```
-
-        Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-    -2.16380 -0.86954  0.08141 -0.02056  0.81522  2.20207 
-
-``` r
-summary(data$biomarker[data$status==1])
-```
-
-       Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    -2.1309 -0.3479  0.3607  0.2124  0.8337  2.3381 
-
-``` r
+if(!requireNamespace("reticulate")){install.packages("reticulate")}
 mccv = reticulate::import('mccv')
 mccv_obj = mccv$mccv(num_bootstraps = as.integer(200))
-mccv_obj$set_X(data[,c('biomarker')])
-mccv_obj$set_Y(data[,c('status')])
+
+X = reticulate::r_to_py(data[,c('obs','biomarker')])
+X = X$set_index(reticulate::r_to_py('obs'))
+
+y = reticulate::r_to_py(data[,c('obs','status')])
+y = y$set_index(reticulate::r_to_py('obs'))
+
+mccv_obj$set_X(X)
+mccv_obj$set_Y(y)
 mccv_obj$run_mccv()
 mccv_obj$run_permuted_mccv()
-lapply(mccv_obj$mccv_data,tibble)
+
+#Output
+lapply(mccv_obj$mccv_data,head)
 ```
 
     Warning in py_to_r.pandas.core.frame.DataFrame(object): index contains
@@ -154,68 +180,86 @@ lapply(mccv_obj$mccv_data,tibble)
     duplicated values: row names not set
 
     $`Model Learning`
-    # A tibble: 200 × 5
-       bootstrap model               test_roc_auc train_roc_auc validation_roc_auc
-           <dbl> <chr>                      <dbl>         <dbl>              <dbl>
-     1         0 Logistic Regression        1             0.529              0.611
-     2         1 Logistic Regression        0.8           0.515              0.732
-     3         2 Logistic Regression        1             0.543              0.4  
-     4         3 Logistic Regression        0.875         0.520              0.727
-     5         4 Logistic Regression        0.812         0.554              0.574
-     6         5 Logistic Regression        1             0.550              0.536
-     7         6 Logistic Regression        0.688         0.578              0.5  
-     8         7 Logistic Regression        0.9           0.603              0.268
-     9         8 Logistic Regression        0.812         0.555              0.554
-    10         9 Logistic Regression        0.85          0.515              0.571
-    # … with 190 more rows
+      bootstrap               model test_roc_auc train_roc_auc validation_roc_auc
+    1         0 Logistic Regression       1.0000     0.5294525          0.6111111
+    2         1 Logistic Regression       0.8000     0.5152355          0.7321429
+    3         2 Logistic Regression       1.0000     0.5430556          0.4000000
+    4         3 Logistic Regression       0.8750     0.5197279          0.7272727
+    5         4 Logistic Regression       0.8125     0.5540541          0.5740741
+    6         5 Logistic Regression       1.0000     0.5499325          0.5357143
 
     $`Feature Importance`
-    # A tibble: 400 × 4
-       bootstrap feature   importance model              
-           <dbl> <chr>          <dbl> <chr>              
-     1         0 biomarker      1.01  Logistic Regression
-     2         0 Intercept     -0.600 Logistic Regression
-     3         1 biomarker      0.509 Logistic Regression
-     4         1 Intercept     -0.226 Logistic Regression
-     5         2 biomarker      1.59  Logistic Regression
-     6         2 Intercept     -0.938 Logistic Regression
-     7         3 biomarker      0.826 Logistic Regression
-     8         3 Intercept     -0.592 Logistic Regression
-     9         4 biomarker      0.866 Logistic Regression
-    10         4 Intercept     -0.533 Logistic Regression
-    # … with 390 more rows
+      bootstrap   feature importance               model
+    1         0 biomarker  1.0107122 Logistic Regression
+    2         0 Intercept -0.5999590 Logistic Regression
+    3         1 biomarker  0.5094043 Logistic Regression
+    4         1 Intercept -0.2264652 Logistic Regression
+    5         2 biomarker  1.5915295 Logistic Regression
+    6         2 Intercept -0.9376893 Logistic Regression
 
     $`Patient Predictions`
-    # A tibble: 3,000 × 5
-       bootstrap model               y_pred y_proba y_true
-           <dbl> <chr>                <int>   <dbl>  <int>
-     1         0 Logistic Regression      0   0.384      1
-     2         0 Logistic Regression      1   0.601      0
-     3         0 Logistic Regression      0   0.401      0
-     4         0 Logistic Regression      1   0.512      1
-     5         0 Logistic Regression      0   0.393      0
-     6         0 Logistic Regression      0   0.466      1
-     7         0 Logistic Regression      1   0.536      1
-     8         0 Logistic Regression      0   0.354      0
-     9         0 Logistic Regression      0   0.447      0
-    10         0 Logistic Regression      0   0.398      1
-    # … with 2,990 more rows
+      bootstrap               model y_pred   y_proba y_true
+    1         0 Logistic Regression      0 0.3844259      1
+    2         0 Logistic Regression      1 0.6012685      0
+    3         0 Logistic Regression      0 0.4010353      0
+    4         0 Logistic Regression      1 0.5122970      1
+    5         0 Logistic Regression      0 0.3927179      0
+    6         0 Logistic Regression      0 0.4658372      1
 
     $Performance
-    # A tibble: 50 × 4
-       model               metric  performance_bootstrap value
-       <chr>               <chr>                   <dbl> <dbl>
-     1 Logistic Regression roc_auc                     0 0.468
-     2 Logistic Regression roc_auc                     1 0.468
-     3 Logistic Regression roc_auc                     2 0.481
-     4 Logistic Regression roc_auc                     3 0.482
-     5 Logistic Regression roc_auc                     4 0.476
-     6 Logistic Regression roc_auc                     5 0.470
-     7 Logistic Regression roc_auc                     6 0.471
-     8 Logistic Regression roc_auc                     7 0.460
-     9 Logistic Regression roc_auc                     8 0.467
-    10 Logistic Regression roc_auc                     9 0.465
-    # … with 40 more rows
+                    model  metric performance_bootstrap     value
+    1 Logistic Regression roc_auc                     0 0.4680915
+    2 Logistic Regression roc_auc                     1 0.4679058
+    3 Logistic Regression roc_auc                     2 0.4812715
+    4 Logistic Regression roc_auc                     3 0.4815138
+    5 Logistic Regression roc_auc                     4 0.4762772
+    6 Logistic Regression roc_auc                     5 0.4696288
+
+``` r
+lapply(mccv_obj$mccv_permuted_data,head)
+```
+
+    Warning in py_to_r.pandas.core.frame.DataFrame(object): index contains
+    duplicated values: row names not set
+
+    Warning in py_to_r.pandas.core.frame.DataFrame(object): index contains
+    duplicated values: row names not set
+
+    $`Model Learning`
+      bootstrap               model test_roc_auc train_roc_auc validation_roc_auc
+    1         0 Logistic Regression       0.5500     0.5062327          0.6428571
+    2         1 Logistic Regression       0.8000     0.4920305          0.7037037
+    3         2 Logistic Regression       0.5625     0.5101351          0.5370370
+    4         3 Logistic Regression       0.8000     0.5069444          0.7037037
+    5         4 Logistic Regression       0.9000     0.5895470          0.3409091
+    6         5 Logistic Regression       0.7000     0.5360111          0.5178571
+
+    $`Feature Importance`
+      bootstrap   feature  importance               model
+    1         0 biomarker -0.19584525 Logistic Regression
+    2         0 Intercept  0.07877354 Logistic Regression
+    3         1 biomarker -0.63001932 Logistic Regression
+    4         1 Intercept  0.23826705 Logistic Regression
+    5         2 biomarker  0.16597553 Logistic Regression
+    6         2 Intercept -0.01437680 Logistic Regression
+
+    $`Patient Predictions`
+      bootstrap               model y_pred   y_proba y_true
+    1         0 Logistic Regression      1 0.5134336      1
+    2         0 Logistic Regression      0 0.4707655      0
+    3         0 Logistic Regression      1 0.5100614      0
+    4         0 Logistic Regression      0 0.4882488      1
+    5         0 Logistic Regression      1 0.5117439      1
+    6         0 Logistic Regression      0 0.4972600      1
+
+    $Performance
+                    model  metric performance_bootstrap     value
+    1 Logistic Regression roc_auc                     0 0.4399838
+    2 Logistic Regression roc_auc                     1 0.4422338
+    3 Logistic Regression roc_auc                     2 0.4494321
+    4 Logistic Regression roc_auc                     3 0.4398971
+    5 Logistic Regression roc_auc                     4 0.4495525
+    6 Logistic Regression roc_auc                     5 0.4435271
 
 # Contribute
 
