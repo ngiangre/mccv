@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -106,7 +169,19 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#work-in-progress" id="toc-work-in-progress" class="nav-link active" data-scroll-target="#work-in-progress">Work In Progress!</a></li>
+  <li><a href="#generate-robust-prediction-intervals-with-the-mccv-python-package" id="toc-generate-robust-prediction-intervals-with-the-mccv-python-package" class="nav-link" data-scroll-target="#generate-robust-prediction-intervals-with-the-mccv-python-package">Generate robust prediction intervals with the <em>mccv</em> python package</a></li>
+  <li><a href="#objectives-of-this-project" id="toc-objectives-of-this-project" class="nav-link" data-scroll-target="#objectives-of-this-project">Objectives of this project</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#contribute" id="toc-contribute" class="nav-link" data-scroll-target="#contribute">Contribute</a></li>
+  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation">Citation</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -128,10 +203,235 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>This is a Quarto website.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
+<section id="work-in-progress" class="level1">
+<h1>Work In Progress!</h1>
+</section>
+<section id="generate-robust-prediction-intervals-with-the-mccv-python-package" class="level1">
+<h1>Generate robust prediction intervals with the <em>mccv</em> python package</h1>
+<p>Binary and Multi-classification algorithm implemented by Giangreco et al.&nbsp;(see references)</p>
+<p><img src="docs/imgs/MCCV_prediction_scheme.png" class="img-fluid"></p>
+</section>
+<section id="objectives-of-this-project" class="level1">
+<h1>Objectives of this project</h1>
+<ol type="1">
+<li><em>mccv</em> python package: easily implement and perform MCCV for learning and prediction tasks.</li>
+<li>Ingest and return dataframes to accessibly build, validate, and interpret MCCV classifiers.</li>
+<li>Show usage in both python and R for even more community accessibility.</li>
+</ol>
+</section>
+<section id="installation" class="level1">
+<h1>Installation</h1>
+<pre><code>mkdir ~/my_directory #choose where to clone the mccv repository
+cd ~/my_directory
+git clone https://github.com/ngiangre/mccv.git
+cd mccv/
+python3 -m pip install .</code></pre>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Usage in Python</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Usage in R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'data/data.csv'</span>,index_col<span class="op">=</span><span class="dv">0</span>) <span class="co"># Feature column name is 'biomarker' and response column  name is 'status'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           status   biomarker
+count  100.000000  100.000000
+mean     0.500000    0.095906
+std      0.502519    1.127545
+min      0.000000   -2.163797
+25%      0.000000   -0.621123
+50%      0.500000    0.199851
+75%      1.000000    0.837820
+max      1.000000    2.338124</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data.groupby(<span class="st">'status'</span>).describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       biomarker                      ...                              
+           count      mean       std  ...       50%       75%       max
+status                                ...                              
+0           50.0 -0.020558  1.130326  ...  0.081415  0.815223  2.202075
+1           50.0  0.212370  1.123985  ...  0.360705  0.833713  2.338124
+
+[2 rows x 8 columns]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mccv</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>mccv_obj <span class="op">=</span> mccv.mccv(num_bootstraps<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>mccv_obj.set_X( data.loc[:,[<span class="st">'biomarker'</span>]] )</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>mccv_obj.set_Y( data.loc[:,[<span class="st">'status'</span>]] )</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>mccv_obj.run_mccv()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>mccv_obj.run_permuted_mccv()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Output</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#mccv_obj.mccv_data # 4 element dictionary</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#mccv_obj.mccv_permuted_data # 4 element dictionary</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyverse")</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
+✔ tibble  3.1.8      ✔ dplyr   1.0.10
+✔ tidyr   1.2.1      ✔ stringr 1.5.0 
+✔ readr   2.1.3      ✔ forcats 0.5.2 
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/data.csv"</span>,<span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">"iid"</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 3
+     obs status biomarker
+   &lt;int&gt;  &lt;int&gt;     &lt;dbl&gt;
+ 1     1      0     1.67 
+ 2     2      0    -0.876
+ 3     3      0    -1.39 
+ 4     4      0    -0.297
+ 5     5      1     0.190
+ 6     6      0     2.20 
+ 7     7      1    -0.121
+ 8     8      1     0.896
+ 9     9      1     0.153
+10    10      1     0.259
+# … with 90 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      obs             status      biomarker       
+ Min.   :  1.00   Min.   :0.0   Min.   :-2.16380  
+ 1st Qu.: 25.75   1st Qu.:0.0   1st Qu.:-0.62112  
+ Median : 50.50   Median :0.5   Median : 0.19985  
+ Mean   : 50.50   Mean   :0.5   Mean   : 0.09591  
+ 3rd Qu.: 75.25   3rd Qu.:1.0   3rd Qu.: 0.83782  
+ Max.   :100.00   Max.   :1.0   Max.   : 2.33812  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data<span class="sc">$</span>biomarker[data<span class="sc">$</span>status<span class="sc">==</span><span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+-2.16380 -0.86954  0.08141 -0.02056  0.81522  2.20207 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data<span class="sc">$</span>biomarker[data<span class="sc">$</span>status<span class="sc">==</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-2.1309 -0.3479  0.3607  0.2124  0.8337  2.3381 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mccv <span class="ot">=</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">'mccv'</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>mccv_obj <span class="ot">=</span> mccv<span class="sc">$</span><span class="fu">mccv</span>(<span class="at">num_bootstraps =</span> <span class="fu">as.integer</span>(<span class="dv">200</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>mccv_obj<span class="sc">$</span><span class="fu">set_X</span>(data[,<span class="fu">c</span>(<span class="st">'biomarker'</span>)])</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>mccv_obj<span class="sc">$</span><span class="fu">set_Y</span>(data[,<span class="fu">c</span>(<span class="st">'status'</span>)])</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>mccv_obj<span class="sc">$</span><span class="fu">run_mccv</span>()</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>mccv_obj<span class="sc">$</span><span class="fu">run_permuted_mccv</span>()</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(mccv_obj<span class="sc">$</span>mccv_data,tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in py_to_r.pandas.core.frame.DataFrame(object): index contains
+duplicated values: row names not set
+
+Warning in py_to_r.pandas.core.frame.DataFrame(object): index contains
+duplicated values: row names not set</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$`Model Learning`
+# A tibble: 200 × 5
+   bootstrap model               test_roc_auc train_roc_auc validation_roc_auc
+       &lt;dbl&gt; &lt;chr&gt;                      &lt;dbl&gt;         &lt;dbl&gt;              &lt;dbl&gt;
+ 1         0 Logistic Regression        1             0.529              0.611
+ 2         1 Logistic Regression        0.8           0.515              0.732
+ 3         2 Logistic Regression        1             0.543              0.4  
+ 4         3 Logistic Regression        0.875         0.520              0.727
+ 5         4 Logistic Regression        0.812         0.554              0.574
+ 6         5 Logistic Regression        1             0.550              0.536
+ 7         6 Logistic Regression        0.688         0.578              0.5  
+ 8         7 Logistic Regression        0.9           0.603              0.268
+ 9         8 Logistic Regression        0.812         0.555              0.554
+10         9 Logistic Regression        0.85          0.515              0.571
+# … with 190 more rows
+
+$`Feature Importance`
+# A tibble: 400 × 4
+   bootstrap feature   importance model              
+       &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;              
+ 1         0 biomarker      1.01  Logistic Regression
+ 2         0 Intercept     -0.600 Logistic Regression
+ 3         1 biomarker      0.509 Logistic Regression
+ 4         1 Intercept     -0.226 Logistic Regression
+ 5         2 biomarker      1.59  Logistic Regression
+ 6         2 Intercept     -0.938 Logistic Regression
+ 7         3 biomarker      0.826 Logistic Regression
+ 8         3 Intercept     -0.592 Logistic Regression
+ 9         4 biomarker      0.866 Logistic Regression
+10         4 Intercept     -0.533 Logistic Regression
+# … with 390 more rows
+
+$`Patient Predictions`
+# A tibble: 3,000 × 5
+   bootstrap model               y_pred y_proba y_true
+       &lt;dbl&gt; &lt;chr&gt;                &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;
+ 1         0 Logistic Regression      0   0.384      1
+ 2         0 Logistic Regression      1   0.601      0
+ 3         0 Logistic Regression      0   0.401      0
+ 4         0 Logistic Regression      1   0.512      1
+ 5         0 Logistic Regression      0   0.393      0
+ 6         0 Logistic Regression      0   0.466      1
+ 7         0 Logistic Regression      1   0.536      1
+ 8         0 Logistic Regression      0   0.354      0
+ 9         0 Logistic Regression      0   0.447      0
+10         0 Logistic Regression      0   0.398      1
+# … with 2,990 more rows
+
+$Performance
+# A tibble: 50 × 4
+   model               metric  performance_bootstrap value
+   &lt;chr&gt;               &lt;chr&gt;                   &lt;dbl&gt; &lt;dbl&gt;
+ 1 Logistic Regression roc_auc                     0 0.468
+ 2 Logistic Regression roc_auc                     1 0.468
+ 3 Logistic Regression roc_auc                     2 0.481
+ 4 Logistic Regression roc_auc                     3 0.482
+ 5 Logistic Regression roc_auc                     4 0.476
+ 6 Logistic Regression roc_auc                     5 0.470
+ 7 Logistic Regression roc_auc                     6 0.471
+ 8 Logistic Regression roc_auc                     7 0.460
+ 9 Logistic Regression roc_auc                     8 0.467
+10 Logistic Regression roc_auc                     9 0.465
+# … with 40 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="contribute" class="level1">
+<h1>Contribute</h1>
+<p>Please do! Reach out to Nick directly (nick.giangreco@gmail.com), make an issue, or make a pull request.</p>
+</section>
+<section id="license" class="level1">
+<h1>License</h1>
+<p>This software is released under the MIT license, which can be found in LICENSE in the root directory of this repository.</p>
+</section>
+<section id="citation" class="level1">
+<h1>Citation</h1>
+<p>Giangreco, N.P., Lebreton, G., Restaino, S. et al.&nbsp;Alterations in the kallikrein-kinin system predict death after heart transplant. Sci Rep 12, 14167 (2022). <a href="https://doi.org/10.1038/s41598-022-18573-2">https://doi.org/10.1038/s41598-022-18573-2</a></p>
+<p>Giangreco et al.&nbsp;2021. Plasma kallikrein predicts primary graft dysfunction after heart transplant. Journal of Heart and Lung Transplantation, 40(10), 1199-1211. <a href="https://doi.org/10.1016/j.healun.2021.07.001">https://doi.org/10.1016/j.healun.2021.07.001</a>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

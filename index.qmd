@@ -2,6 +2,107 @@
 title: "Monte Carlo Cross Validation"
 ---
 
-This is a Quarto website.
+# Work In Progress!
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+# Generate robust prediction intervals with the _mccv_ python package
+
+Binary and Multi-classification algorithm implemented by Giangreco et al. (see references)
+
+![](docs/imgs/MCCV_prediction_scheme.png)
+
+# Objectives of this project
+
+1. _mccv_ python package: easily implement and perform MCCV for learning and prediction tasks.
+2. Ingest and return dataframes to accessibly build, validate, and interpret MCCV classifiers.
+3. Show usage in both python and R for even more community accessibility.
+
+# Installation
+
+```
+mkdir ~/my_directory #choose where to clone the mccv repository
+cd ~/my_directory
+git clone https://github.com/ngiangre/mccv.git
+cd mccv/
+python3 -m pip install .
+```
+
+# Usage
+
+::: {.panel-tabset}
+
+# Python
+
+```{python}
+import pandas as pd
+data = pd.read_csv('data/data.csv',index_col=0) # Feature column name is 'biomarker' and response column  name is 'status'
+```
+
+```{python}
+data.describe()
+```
+
+```{python}
+data.groupby('status').describe()
+```
+
+```{python}
+import mccv
+mccv_obj = mccv.mccv(num_bootstraps=200)
+mccv_obj.set_X( data.loc[:,['biomarker']] )
+mccv_obj.set_Y( data.loc[:,['status']] )
+mccv_obj.run_mccv()
+mccv_obj.run_permuted_mccv()
+
+#Output
+#mccv_obj.mccv_data # 4 element dictionary
+#mccv_obj.mccv_permuted_data # 4 element dictionary
+```
+
+# R
+
+```{r}
+#install.packages("tidyverse")
+library(tidyverse)
+data <- read_csv("data/data.csv",col_types = c("iid"))
+data
+```
+
+```{r}
+summary(data)
+```
+
+```{r}
+summary(data$biomarker[data$status==0])
+```
+
+```{r}
+summary(data$biomarker[data$status==1])
+```
+
+```{r}
+mccv = reticulate::import('mccv')
+mccv_obj = mccv$mccv(num_bootstraps = as.integer(200))
+mccv_obj$set_X(data[,c('biomarker')])
+mccv_obj$set_Y(data[,c('status')])
+mccv_obj$run_mccv()
+mccv_obj$run_permuted_mccv()
+lapply(mccv_obj$mccv_data,tibble)
+```
+
+:::
+
+# Contribute
+
+Please do! Reach out to Nick directly (nick.giangreco@gmail.com), make an issue, or make a pull request.
+
+# License
+
+This software is released under the MIT license, which can be found in LICENSE in the root directory of this repository.
+
+# Citation
+
+Giangreco, N.P., Lebreton, G., Restaino, S. et al. Alterations in the kallikrein-kinin system predict death after heart transplant. Sci Rep 12, 14167 (2022). [https://doi.org/10.1038/s41598-022-18573-2](https://doi.org/10.1038/s41598-022-18573-2)
+
+Giangreco et al. 2021. Plasma kallikrein predicts primary graft dysfunction after heart transplant. Journal of Heart and Lung Transplantation, 40(10), 1199-1211. [https://doi.org/10.1016/j.healun.2021.07.001](https://doi.org/10.1016/j.healun.2021.07.001).
+
+
