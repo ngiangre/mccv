@@ -2,34 +2,31 @@
 title: "Monte Carlo Cross Validation"
 ---
 
-# Work In Progress!
+## ⚠️ Work In Progress! ⚠️
 
-# Generate robust prediction intervals with the _mccv_ python package
+# Robust and interpretable prediction 
 
-Binary and Multi-classification algorithm implemented by Giangreco et al. (see references)
+Binary and Multi-classification algorithm for adverse outcome detection, survival classification, and endpoint prediction (see references for details)
 
 ![](MCCV_prediction_scheme.png)
 
 # Objectives of this project
 
-1. _mccv_ python package: easily implement and perform MCCV for learning and prediction tasks.
-2. Ingest and return dataframes to accessibly build, validate, and interpret MCCV classifiers.
-3. Show usage in both python and R for even more community accessibility.
+1.  Build the *mccv* python package: easily implement and perform MCCV for learning and prediction tasks.
+2.  Showcase accessibly to build, validate, and interpret MCCV classifiers.
+3.  Demonstrate use in both python and R for diverse community implementations.
 
 # Installation
 
-```
-mkdir ~/my_directory #choose where to clone the mccv repository
-cd ~/my_directory
-git clone https://github.com/ngiangre/mccv.git
-cd mccv/
-python3 -m pip install .
-```
+    mkdir ~/my_directory #choose where to clone the mccv repository
+    cd ~/my_directory
+    git clone https://github.com/ngiangre/mccv.git
+    cd mccv/
+    python3 -m pip install .
 
 # Usage
 
-::: {.panel-tabset}
-
+::: panel-tabset
 # Python
 
 ```{python}
@@ -84,12 +81,11 @@ mccv_obj$run_permuted_mccv()
 lapply(mccv_obj$mccv_data,head)
 lapply(mccv_obj$mccv_permuted_data,head)
 ```
-
 :::
 
 # Contribute
 
-Please do! Reach out to Nick directly (nick.giangreco@gmail.com), make an issue, or make a pull request.
+Please do! Reach out to Nick directly (nick.giangreco\@gmail.com), make an issue, or make a pull request.
 
 # License
 
@@ -97,8 +93,6 @@ This software is released under the MIT license, which can be found in LICENSE i
 
 # Citation
 
-Giangreco, N.P., Lebreton, G., Restaino, S. et al. Alterations in the kallikrein-kinin system predict death after heart transplant. Sci Rep 12, 14167 (2022). [https://doi.org/10.1038/s41598-022-18573-2](https://doi.org/10.1038/s41598-022-18573-2)
+Giangreco, N.P., Lebreton, G., Restaino, S. et al. Alterations in the kallikrein-kinin system predict death after heart transplant. Sci Rep 12, 14167 (2022). <https://doi.org/10.1038/s41598-022-18573-2>
 
-Giangreco et al. 2021. Plasma kallikrein predicts primary graft dysfunction after heart transplant. Journal of Heart and Lung Transplantation, 40(10), 1199-1211. [https://doi.org/10.1016/j.healun.2021.07.001](https://doi.org/10.1016/j.healun.2021.07.001).
-
-
+Giangreco et al. 2021. Plasma kallikrein predicts primary graft dysfunction after heart transplant. Journal of Heart and Lung Transplantation, 40(10), 1199-1211. <https://doi.org/10.1016/j.healun.2021.07.001>.

@@ -1,23 +1,24 @@
 Monte Carlo Cross Validation
 ================
 
-# Work In Progress!
+## ⚠️ Work In Progress! ⚠️
 
-# Generate robust prediction intervals with the *mccv* python package
+# Robust and interpretable prediction
 
-Binary and Multi-classification algorithm implemented by Giangreco et
-al. (see references)
+Binary and Multi-classification algorithm for adverse outcome detection,
+survival classification, and endpoint prediction (see references for
+details)
 
 ![](MCCV_prediction_scheme.png)
 
 # Objectives of this project
 
-1.  *mccv* python package: easily implement and perform MCCV for
-    learning and prediction tasks.
-2.  Ingest and return dataframes to accessibly build, validate, and
-    interpret MCCV classifiers.
-3.  Show usage in both python and R for even more community
-    accessibility.
+1.  Build the *mccv* python package: easily implement and perform MCCV
+    for learning and prediction tasks.
+2.  Showcase accessibly to build, validate, and interpret MCCV
+    classifiers.
+3.  Demonstrate use in both python and R for diverse community
+    implementations.
 
 # Installation
 
