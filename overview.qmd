@@ -1,0 +1,42 @@
+---
+title: "Overview"
+---
+
+# Description
+
+MCCV was developed to:
+
+1.  Generate robust predictions for small data
+2.  Evaluate variable or feature importance on all subpopulations of the data
+3.  Include prediction uncertainty and variance
+4.  Develop classifiers for use on unseen data
+
+# Related Methods
+
+-   Monte-Carlo simulation (mc_cvsimilar to [ShuffleSplit in sklearn](https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit))
+
+-   Cross-Validation ([tidymodels in R](https://www.tmwr.org/resampling.html) and [sklearn in python](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation))
+
+-   [*mc_cv* from tidymodels in R](https://rsample.tidymodels.org/reference/mc_cv.html), but does not include additional cross validation as explained below
+
+# The novelty of MCCV
+
+-   Monte Carlo simulation splits the data into training and validation sets
+
+-   10-fold cross validation on the *training set* is used to estimate "good" model hyperparameters
+
+-   The model with the "good" hyperparameters is fit on the training set and predictions are made on the yet-to-be-seen validation set
+
+-   Performance metrics are generated using resamples (bootstrap with replacement) of the observation probabilities
+
+# Main advantages
+
+-   Predictions are generated on many different training/validation data splits
+-   Variable or feature importances to the dependent variable are generalized over many subpopulations of the data
+-   Predictions of the observations have reduced variance and generalize to unseen observations
+
+# References
+
+-   [K-fold and Montecarlo cross-validation vs Bootstrap: a primer](https://nirpyresearch.com/kfold-montecarlo-cross-validation-bootstrap-primer/)
+
+-   [Cross-Validation: K Fold vs Monte Carlo](https://towardsdatascience.com/cross-validation-k-fold-vs-monte-carlo-e54df2fc179b)

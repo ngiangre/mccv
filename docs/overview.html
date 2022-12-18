@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>mccv - Presentation</title>
+<title>mccv - Overview</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./overview.html">
+    <a class="nav-link active" href="./overview.html" aria-current="page">
  <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
@@ -92,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Getting Started</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page">
+    <a class="nav-link" href="./about.html">
  <span class="menu-text">Presentation</span></a>
   </li>  
 </ul>
@@ -116,14 +116,24 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description">Description</a></li>
+  <li><a href="#related-methods" id="toc-related-methods" class="nav-link" data-scroll-target="#related-methods">Related Methods</a></li>
+  <li><a href="#the-novelty-of-mccv" id="toc-the-novelty-of-mccv" class="nav-link" data-scroll-target="#the-novelty-of-mccv">The novelty of MCCV</a></li>
+  <li><a href="#main-advantages" id="toc-main-advantages" class="nav-link" data-scroll-target="#main-advantages">Main advantages</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Presentation</h1>
+<h1 class="title">Overview</h1>
 </div>
 
 
@@ -138,10 +148,50 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<iframe class="slide-deck" width="100%" height="100%" src="MCCV_presentation.html">
-</iframe>
+<section id="description" class="level1">
+<h1>Description</h1>
+<p>MCCV was developed to:</p>
+<ol type="1">
+<li>Generate robust predictions for small data</li>
+<li>Evaluate variable or feature importance on all subpopulations of the data</li>
+<li>Include prediction uncertainty and variance</li>
+<li>Develop classifiers for use on unseen data</li>
+</ol>
+</section>
+<section id="related-methods" class="level1">
+<h1>Related Methods</h1>
+<ul>
+<li><p>Monte-Carlo simulation (mc_cvsimilar to <a href="https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit">ShuffleSplit in sklearn</a>)</p></li>
+<li><p>Cross-Validation (<a href="https://www.tmwr.org/resampling.html">tidymodels in R</a> and <a href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation">sklearn in python</a>)</p></li>
+<li><p><a href="https://rsample.tidymodels.org/reference/mc_cv.html"><em>mc_cv</em> from tidymodels in R</a>, but does not include additional cross validation as explained below</p></li>
+</ul>
+</section>
+<section id="the-novelty-of-mccv" class="level1">
+<h1>The novelty of MCCV</h1>
+<ul>
+<li><p>Monte Carlo simulation splits the data into training and validation sets</p></li>
+<li><p>10-fold cross validation on the <em>training set</em> is used to estimate “good” model hyperparameters</p></li>
+<li><p>The model with the “good” hyperparameters is fit on the training set and predictions are made on the yet-to-be-seen validation set</p></li>
+<li><p>Performance metrics are generated using resamples (bootstrap with replacement) of the observation probabilities</p></li>
+</ul>
+</section>
+<section id="main-advantages" class="level1">
+<h1>Main advantages</h1>
+<ul>
+<li>Predictions are generated on many different training/validation data splits</li>
+<li>Variable or feature importances to the dependent variable are generalized over many subpopulations of the data</li>
+<li>Predictions of the observations have reduced variance and generalize to unseen observations</li>
+</ul>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ul>
+<li><p><a href="https://nirpyresearch.com/kfold-montecarlo-cross-validation-bootstrap-primer/">K-fold and Montecarlo cross-validation vs Bootstrap: a primer</a></p></li>
+<li><p><a href="https://towardsdatascience.com/cross-validation-k-fold-vs-monte-carlo-e54df2fc179b">Cross-Validation: K Fold vs Monte Carlo</a></p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

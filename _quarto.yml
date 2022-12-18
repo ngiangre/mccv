@@ -11,7 +11,10 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - overview.qmd
+      - getting_started.qmd
       - about.qmd
+    right:
       - href: Generating_Datasets_For_MCCV.ipynb
         text: Biomarker Datasets
       - href: Running_Biomarker_Predictions_By_MCCV.ipynb

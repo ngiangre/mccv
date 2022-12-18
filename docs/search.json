@@ -75,5 +75,19 @@
     "title": "Clinical machine learning using Monte Carlo Cross Validation (MCCV)",
     "section": "MCCV example",
     "text": "MCCV example\n\nimport pandas as pd\ndata = pd.read_csv('data/data.csv',index_col=0) # Feature column name is 'biomarker' and response column  name is 'status'\n\n\n#MCCV procedure\nimport mccv\nmccv_obj = mccv.mccv(num_bootstraps=200)\nmccv_obj.set_X( data.loc[:,['biomarker']] )\nmccv_obj.set_Y( data.loc[:,['status']] )\nmccv_obj.run_mccv()\nmccv_obj.run_permuted_mccv()\n\n#Output\n#mccv_obj.mccv_data # 4 element dictionary\n#mccv_obj.mccv_permuted_data # 4 element dictionary"
+  },
+  {
+    "objectID": "getting_started.html",
+    "href": "getting_started.html",
+    "title": "Getting Started",
+    "section": "",
+    "text": "🔜 Coming soon 🔜"
+  },
+  {
+    "objectID": "overview.html",
+    "href": "overview.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Description\nMCCV was developed to:\n\nGenerate robust predictions for small data\nEvaluate variable or feature importance on all subpopulations of the data\nInclude prediction uncertainty and variance\nDevelop classifiers for use on unseen data\n\n\n\nRelated Methods\n\nMonte-Carlo simulation (mc_cvsimilar to ShuffleSplit in sklearn)\nCross-Validation (tidymodels in R and sklearn in python)\nmc_cv from tidymodels in R, but does not include additional cross validation as explained below\n\n\n\nThe novelty of MCCV\n\nMonte Carlo simulation splits the data into training and validation sets\n10-fold cross validation on the training set is used to estimate “good” model hyperparameters\nThe model with the “good” hyperparameters is fit on the training set and predictions are made on the yet-to-be-seen validation set\nPerformance metrics are generated using resamples (bootstrap with replacement) of the observation probabilities\n\n\n\nMain advantages\n\nPredictions are generated on many different training/validation data splits\nVariable or feature importances to the dependent variable are generalized over many subpopulations of the data\nPredictions of the observations have reduced variance and generalize to unseen observations\n\n\n\nReferences\n\nK-fold and Montecarlo cross-validation vs Bootstrap: a primer\nCross-Validation: K Fold vs Monte Carlo"
   }
 ]
