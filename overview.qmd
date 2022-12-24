@@ -4,22 +4,22 @@ title: "Overview"
 
 # Description
 
-MCCV was developed to:
+This implementation of MCCV was developed to:
 
 1.  Generate robust predictions for small data
 2.  Evaluate variable or feature importance on all subpopulations of the data
 3.  Include prediction uncertainty and variance
-4.  Develop classifiers for use on unseen data
+4.  Develop classifiers for validation on unseen data
 
 # Related Methods
 
--   Monte-Carlo simulation (mc_cvsimilar to [ShuffleSplit in sklearn](https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit))
+-   Monte-Carlo simulation (similar to [ShuffleSplit in sklearn](https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit))
 
 -   Cross-Validation ([tidymodels in R](https://www.tmwr.org/resampling.html) and [sklearn in python](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation))
 
 -   [*mc_cv* from tidymodels in R](https://rsample.tidymodels.org/reference/mc_cv.html), but does not include additional cross validation as explained below
 
-# The novelty of MCCV
+# Procedural overview
 
 -   Monte Carlo simulation splits the data into training and validation sets
 

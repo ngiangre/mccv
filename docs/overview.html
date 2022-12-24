@@ -96,16 +96,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Presentation</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./Generating_Datasets_For_MCCV.html">
- <span class="menu-text">Biomarker Datasets</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./Running_Biomarker_Predictions_By_MCCV.html">
- <span class="menu-text">Biomarker Predictions</span></a>
-  </li>  
-</ul>
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -122,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description">Description</a></li>
   <li><a href="#related-methods" id="toc-related-methods" class="nav-link" data-scroll-target="#related-methods">Related Methods</a></li>
-  <li><a href="#the-novelty-of-mccv" id="toc-the-novelty-of-mccv" class="nav-link" data-scroll-target="#the-novelty-of-mccv">The novelty of MCCV</a></li>
+  <li><a href="#procedural-overview" id="toc-procedural-overview" class="nav-link" data-scroll-target="#procedural-overview">Procedural overview</a></li>
   <li><a href="#main-advantages" id="toc-main-advantages" class="nav-link" data-scroll-target="#main-advantages">Main advantages</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -150,24 +140,24 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="description" class="level1">
 <h1>Description</h1>
-<p>MCCV was developed to:</p>
+<p>This implementation of MCCV was developed to:</p>
 <ol type="1">
 <li>Generate robust predictions for small data</li>
 <li>Evaluate variable or feature importance on all subpopulations of the data</li>
 <li>Include prediction uncertainty and variance</li>
-<li>Develop classifiers for use on unseen data</li>
+<li>Develop classifiers for validation on unseen data</li>
 </ol>
 </section>
 <section id="related-methods" class="level1">
 <h1>Related Methods</h1>
 <ul>
-<li><p>Monte-Carlo simulation (mc_cvsimilar to <a href="https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit">ShuffleSplit in sklearn</a>)</p></li>
+<li><p>Monte-Carlo simulation (similar to <a href="https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit">ShuffleSplit in sklearn</a>)</p></li>
 <li><p>Cross-Validation (<a href="https://www.tmwr.org/resampling.html">tidymodels in R</a> and <a href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation">sklearn in python</a>)</p></li>
 <li><p><a href="https://rsample.tidymodels.org/reference/mc_cv.html"><em>mc_cv</em> from tidymodels in R</a>, but does not include additional cross validation as explained below</p></li>
 </ul>
 </section>
-<section id="the-novelty-of-mccv" class="level1">
-<h1>The novelty of MCCV</h1>
+<section id="procedural-overview" class="level1">
+<h1>Procedural overview</h1>
 <ul>
 <li><p>Monte Carlo simulation splits the data into training and validation sets</p></li>
 <li><p>10-fold cross validation on the <em>training set</em> is used to estimate “good” model hyperparameters</p></li>
