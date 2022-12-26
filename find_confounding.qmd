@@ -1,0 +1,112 @@
+---
+title: "Confounding Illustrated with MCCV"
+format:
+  html:
+    code-fold: true
+    code-summary: 'Show The Code'
+---
+
+One of the many subtasks wehn performing a prediction scheme is to include confounding variables. But what is a confounder and why include it? Counfounders can be illustrated using a causal diagram (From [this Wikipedia page](https://en.wikipedia.org/wiki/Confounding)):
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Comparison_confounder_mediator.svg/2560px-Comparison_confounder_mediator.svg.png)
+
+As you can see, a confounding variable is something that confounds or 'confuses' the relationship between an exposure and an outcome. The relationship between an exposure X and an outcome Y is influenced by a confounding variable Z.
+
+Here, I will show how MCCV can be used to identify confounders.
+
+# Generate dataset with X, Y, and Z variables
+
+```{python}
+
+import numpy as np
+N=100
+Z1 = np.random.normal(loc=0,scale=1,size=N)
+Z2 = np.random.normal(loc=1,scale=1,size=N)
+Z = np.concatenate([Z1,Z2])
+Y = np.concatenate([np.repeat(0,N),np.repeat(1,N)])
+X = Z + np.random.normal(loc=0,scale=1,size=len(Z))
+```
+
+```{r}
+
+df <- tibble::tibble(
+    X = reticulate::py$X,
+    Y = reticulate::py$Y,
+    Z = reticulate::py$Z
+)
+df[['Y']] <- factor(df$Y,levels=c(0,1))
+
+df
+
+GGally::ggpairs(df)
+```
+
+# Employ MCCV: Predict Y from X, Y from Z, Y from X and Z
+
+```{python}
+import pandas as pd
+df = pd.DataFrame(data={'X' : X,'Y' : Y,'Z' : Z})
+df.index.name = 'pt'
+
+X = df.loc[:,['X']]
+Y = df.loc[:,['Y']]
+Z = df.loc[:,['Z']]
+XZ = df.loc[:,['X','Z']]
+
+```
+
+```{python}
+import mccv
+
+mccv_YXobj = mccv.mccv(num_bootstraps=200,n_jobs=2)
+mccv_YXobj.set_X(X)
+mccv_YXobj.set_Y(Y)
+mccv_YXobj.run_mccv()
+
+mccv_YZobj = mccv.mccv(num_bootstraps=200,n_jobs=2)
+mccv_YZobj.set_X(Z)
+mccv_YZobj.set_Y(Y)
+mccv_YZobj.run_mccv()
+
+mccv_YXZobj = mccv.mccv(num_bootstraps=200,n_jobs=2)
+mccv_YXZobj.set_X(XZ)
+mccv_YXZobj.set_Y(Y)
+mccv_YXZobj.run_mccv()
+```
+
+```{python}
+
+f_imp_dfs = dict()
+f_imp_dfs['YXobj'] = \
+mccv_YXobj.mccv_data['Feature Importance']
+f_imp_dfs['YZobj'] = \
+mccv_YZobj.mccv_data['Feature Importance']
+f_imp_dfs['YXZobj'] = \
+mccv_YXZobj.mccv_data['Feature Importance']
+
+```
+
+# Visualize feature importances
+
+```{r}
+library(ggplot2)
+
+f_imp_plot <- function(x,title){
+    ggplot(x,aes(feature,importance,color=feature)) +
+    geom_boxplot(alpha=0) +
+    geom_point(position=position_jitter(width=0.2)) +
+    scale_color_manual(values=c("X" = "indianred",
+                                "Y" = "skyblue",
+                                "Z" = "black",
+                                "Intercept" = "gray")) +
+    theme_bw() +
+    labs(title=title)
+}
+
+library(patchwork)
+(f_imp_plot( reticulate::py$f_imp_dfs$YXobj,"Y ~ X" ) +
+    f_imp_plot( reticulate::py$f_imp_dfs$YZobj,"Y ~ Z" ) ) /
+    f_imp_plot( reticulate::py$f_imp_dfs$YXZobj,"Y ~ X + Z" )
+```
+
+In this example, Z is confounding the relationship between X and Y. The 'Y \~ X' model shows that X is very important in predicting Y. However, when Z is included in the model 'Y \~ X + Z', you see that Z remains very important but X is no longer important for predicting Y.

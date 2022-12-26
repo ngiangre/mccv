@@ -5,6 +5,10 @@ project:
     - "*.qmd"
   output-dir: docs
 
+execute:
+  cache: true
+  freeze: auto
+
 website:
   title: "mccv"
   navbar:
@@ -13,7 +17,7 @@ website:
         text: Home
       - overview.qmd
       - getting_started.qmd
-      - about.qmd
+      - find_confounding.qmd
     # right:
     #   - href: Generating_Datasets_For_MCCV.ipynb
     #     text: Biomarker Datasets
