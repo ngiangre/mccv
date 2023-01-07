@@ -205,7 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Here, I will show how MCCV can be used to identify confounders.</p>
 <section id="generate-dataset-with-x-y-and-z-variables" class="level1">
 <h1>Generate dataset with X, Y, and Z variables</h1>
-<div class="cell" data-hash="find_confounding_cache/html/unnamed-chunk-1_d3adda19062781e272d65c09cc51842b">
+<div class="cell" data-hash="find_confounding_cache/html/unnamed-chunk-1_a773f7e11c01be88d50282cc8b3bcbfa">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -214,8 +214,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Z1 <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="dv">0</span>,scale<span class="op">=</span><span class="dv">1</span>,size<span class="op">=</span>N)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Z2 <span class="op">=</span> np.random.normal(loc<span class="op">=</span><span class="dv">1</span>,scale<span class="op">=</span><span class="dv">1</span>,size<span class="op">=</span>N)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> np.concatenate([Z1,Z2])</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.concatenate([np.repeat(<span class="dv">0</span>,N),np.repeat(<span class="dv">1</span>,N)])</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> Z <span class="op">+</span> np.random.normal(loc<span class="op">=</span><span class="dv">0</span>,scale<span class="op">=</span><span class="dv">1</span>,size<span class="op">=</span><span class="bu">len</span>(Z))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy <span class="im">as</span> sc</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.concatenate([sc.stats.bernoulli.rvs(z,size<span class="op">=</span><span class="dv">1</span>) <span class="cf">for</span> z <span class="kw">in</span> (Z <span class="op">-</span> <span class="bu">min</span>(Z)) <span class="op">/</span> (<span class="bu">max</span>(Z) <span class="op">-</span> <span class="bu">min</span>(Z))])</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> Z <span class="op">+</span> np.random.normal(loc<span class="op">=</span><span class="dv">0</span>,scale<span class="op">=</span><span class="dv">1</span>,size<span class="op">=</span><span class="bu">len</span>(Z))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-hash="find_confounding_cache/html/unnamed-chunk-2_1b9830ae30f3c4756b2ba15e37be4b99">
@@ -370,7 +372,7 @@ duplicated values: row names not set</code></pre>
 <p><img src="find_confounding_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>In this example, Z is confounding the relationship between X and Y. The ‘Y ~ X’ model shows that X is very important in predicting Y. However, when Z is included in the model ‘Y ~ X + Z’, you see that Z remains very important but X is no longer important for predicting Y.</p>
+<p>In this example, Z is confounding the relationship between X and Y. The ‘Y ~ X’ model shows that X is very important in predicting Y. However, when Z is included in the model ‘Y ~ X + Z’, you see that Z remains very important but X is no longer important for predicting Y. This toy example had Z causing Y and Z causing X, and any relationship between X and Y was spurious. Therefore, including X and Z as predictors showed only the importance of X in predicting Y.</p>
 
 
 </section>

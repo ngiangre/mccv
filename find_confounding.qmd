@@ -23,7 +23,9 @@ N=100
 Z1 = np.random.normal(loc=0,scale=1,size=N)
 Z2 = np.random.normal(loc=1,scale=1,size=N)
 Z = np.concatenate([Z1,Z2])
-Y = np.concatenate([np.repeat(0,N),np.repeat(1,N)])
+
+import scipy as sc
+Y = np.concatenate([sc.stats.bernoulli.rvs(z,size=1) for z in (Z - min(Z)) / (max(Z) - min(Z))])
 X = Z + np.random.normal(loc=0,scale=1,size=len(Z))
 ```
 
@@ -109,4 +111,4 @@ library(patchwork)
     f_imp_plot( reticulate::py$f_imp_dfs$YXZobj,"Y ~ X + Z" )
 ```
 
-In this example, Z is confounding the relationship between X and Y. The 'Y \~ X' model shows that X is very important in predicting Y. However, when Z is included in the model 'Y \~ X + Z', you see that Z remains very important but X is no longer important for predicting Y.
+In this example, Z is confounding the relationship between X and Y. The 'Y \~ X' model shows that X is very important in predicting Y. However, when Z is included in the model 'Y \~ X + Z', you see that Z remains very important but X is no longer important for predicting Y. This toy example had Z causing Y and Z causing X, and any relationship between X and Y was spurious. Therefore, including X and Z as predictors showed only the importance of X in predicting Y.
