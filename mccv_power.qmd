@@ -1,0 +1,143 @@
+---
+title: "Estimating Power Using MCCV"
+format:
+  html:
+    code-fold: true
+    code-summary: 'Show The Code'
+---
+
+A question of interest often is at what sample size can I detect an effect? MCCV can estimate the power to detect an effect by learning from data at different sample sizes. For example, I may reach a large effect or performance, say 0.8 AUROC, using all subjects. However, can I still reach or get close to 0.8 AUROC at a smaller sample size, say 50% of subjects? This article will show an interactive example of how learning from varying sample sizes yields effects reaching the effect using all the data.
+
+```{python}
+#| warning: false
+import numpy as np
+N=100
+Z1 = np.random.beta(2.5,3.5,size=N)
+Z2 = np.random.beta(3.5,2.5,size=N)
+Z = np.concatenate([Z1,Z2])
+
+import scipy as sc
+Y = np.concatenate([np.repeat(0,N),np.repeat(1,N)])
+
+import pandas as pd
+df = pd.DataFrame(data={'Y' : Y,'Z' : Z})
+df.index.name = 'pt'
+```
+
+```{r}
+#| warning: false
+library(tidyverse)
+
+df <- tibble::tibble(
+    Y = reticulate::py$Y,
+    Z = reticulate::py$Z
+)
+df[['Y']] <- factor(df$Y,levels=c(0,1))
+
+df %>% 
+    ggplot(aes(Y,Z)) +
+    geom_boxplot(outlier.size = NA,alpha=0,linewidth=2) +
+    geom_point(position = position_jitter(width = .2),pch=21,fill='gray',size=3) +
+    labs(x = "Response",y="Predictor") +
+    theme_bw(base_size = 16)
+```
+
+```{python}
+import mccv
+
+perf_dfs = []
+for ts in [.1,.2,.3,.4,.5,.6,.7,.8]:
+    mccv_obj = mccv.mccv(num_bootstraps=200,n_jobs=4)
+    mccv_obj.test_size = ts
+    mccv_obj.set_X(df[['Z']])
+    mccv_obj.set_Y(df[['Y']])
+    mccv_obj.run_mccv()
+    perf_df = mccv_obj.mccv_data['Performance']
+    perf_df.insert(len(perf_df.columns),'training_size',1-ts)
+    perf_df.insert(len(perf_df.columns),'test_size',ts)
+    perf_dfs.append(perf_df)
+```
+
+```{r}
+reticulate::py$perf_dfs %>% 
+    bind_rows() %>% 
+    ggplot(aes(factor(training_size),value)) +
+    geom_boxplot(outlier.size = NA,alpha=0,linewidth=2) +
+    geom_point(position = position_jitter(width = .2),pch=21,fill='gray',size=3) +
+    scale_x_discrete(
+        labels = function(x)paste0(as.double(x)*100,"%")
+    ) +
+    labs(x = "Sample Size for MCCV Training",y="AUROC",caption=paste0(
+        "As we increase our sample size for learning,\n",
+        "performance increases as expected,\n",
+        "but so does AUROC variability")) +
+    theme_bw(base_size = 16)
+```
+
+The below is an example where the AUROC vriability actually shows a decreased overall performance:
+
+```{python}
+#| warning: false
+import numpy as np
+N=100
+Z1 = np.random.beta(2,4,size=N)
+Z2 = np.random.beta(8,6,size=N)
+Z = np.concatenate([Z1,Z2])
+
+import scipy as sc
+Y = np.concatenate([np.repeat(0,N),np.repeat(1,N)])
+
+import pandas as pd
+df = pd.DataFrame(data={'Y' : Y,'Z' : Z})
+df.index.name = 'pt'
+```
+
+```{r}
+#| warning: false
+library(tidyverse)
+
+df <- tibble::tibble(
+    Y = reticulate::py$Y,
+    Z = reticulate::py$Z
+)
+df[['Y']] <- factor(df$Y,levels=c(0,1))
+
+df %>% 
+    ggplot(aes(Y,Z)) +
+    geom_boxplot(outlier.size = NA,alpha=0,linewidth=2) +
+    geom_point(position = position_jitter(width = .2),pch=21,fill='gray',size=3) +
+    labs(x = "Response",y="Predictor") +
+    theme_bw(base_size = 16)
+```
+
+```{python}
+import mccv
+
+perf_dfs = []
+for ts in [.1,.2,.3,.4,.5,.6,.7,.8]:
+    mccv_obj = mccv.mccv(num_bootstraps=200,n_jobs=4)
+    mccv_obj.test_size = ts
+    mccv_obj.set_X(df[['Z']])
+    mccv_obj.set_Y(df[['Y']])
+    mccv_obj.run_mccv()
+    perf_df = mccv_obj.mccv_data['Performance']
+    perf_df.insert(len(perf_df.columns),'training_size',1-ts)
+    perf_df.insert(len(perf_df.columns),'test_size',ts)
+    perf_dfs.append(perf_df)
+```
+
+```{r}
+reticulate::py$perf_dfs %>% 
+    bind_rows() %>% 
+    ggplot(aes(factor(training_size),value)) +
+    geom_boxplot(outlier.size = NA,alpha=0,linewidth=2) +
+    geom_point(position = position_jitter(width = .2),pch=21,fill='gray',size=3) +
+    scale_x_discrete(
+        labels = function(x)paste0(as.double(x)*100,"%")
+    ) +
+    labs(x = "Sample Size for MCCV Training",y="AUROC",caption=paste0(
+        "As we increase our sample size for learning,\n",
+        "performance increases as expected,\n",
+        "but so does AUROC variability that shows decreased overall performance")) +
+    theme_bw(base_size = 16)
+```

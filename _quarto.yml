@@ -18,6 +18,7 @@ website:
       - overview.qmd
       - getting_started.qmd
       - find_confounding.qmd
+      - mccv_power.qmd
     # right:
     #   - href: Generating_Datasets_For_MCCV.ipynb
     #     text: Biomarker Datasets
