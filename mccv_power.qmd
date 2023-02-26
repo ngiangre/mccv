@@ -143,8 +143,7 @@ reticulate::py$perf_dfs %>%
     ) +
     labs(x = "Sample Size for MCCV Training",y="AUROC",caption=paste0(
         "As we increase our sample size for learning,\n",
-        "performance increases as expected,\n",
-        "but so does AUROC variability that shows decreased overall performance")) +
+        "performance increases as expected but also stagnates")) +
     theme_bw(base_size = 16)
 ```
 
@@ -152,5 +151,3 @@ In short, my thinking is the data generating process is captured in a sample onl
 
 1.  There is stagnant performance between using 30% and 80% of the sample size for training
 2.  There is a stark difference between using 20% and 90% of the sample size for training. I would expect there to be more overlap compared to complete non-overlap.
-
-Feel free to comment on the post for a discussion on my thinking - would love to discuss this!

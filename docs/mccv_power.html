@@ -337,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    perf_dfs.append(perf_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-8_08627e700ccb55ce4f96a9cbf77771fb">
+<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-8_17ae1e2234fe95d73a76d49038ab6630">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span>py<span class="sc">$</span>perf_dfs <span class="sc">%&gt;%</span> </span>
@@ -350,9 +350,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sample Size for MCCV Training"</span>,<span class="at">y=</span><span class="st">"AUROC"</span>,<span class="at">caption=</span><span class="fu">paste0</span>(</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"As we increase our sample size for learning,</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"performance increases as expected,</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"but so does AUROC variability that shows decreased overall performance"</span>)) <span class="sc">+</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"performance increases as expected but also stagnates"</span>)) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="mccv_power_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
@@ -363,7 +362,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>There is stagnant performance between using 30% and 80% of the sample size for training</li>
 <li>There is a stark difference between using 20% and 90% of the sample size for training. I would expect there to be more overlap compared to complete non-overlap.</li>
 </ol>
-<p>Feel free to comment on the post for a discussion on my thinking - would love to discuss this!</p>
 
 
 
