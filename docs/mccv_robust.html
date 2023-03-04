@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>mccv - Estimating Power Using MCCV</title>
+<title>mccv - Estimating Robustness Using MCCV</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -159,8 +159,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="menu-text">Identifying Confounders and Mediators with MCCV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./mccv_power.html" aria-current="page">
- <span class="menu-text">Estimating Power Using MCCV</span></a>
+    <a class="nav-link active" href="./mccv_robust.html" aria-current="page">
+ <span class="menu-text">Estimating Robustness Using MCCV</span></a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -180,7 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Estimating Power Using MCCV</h1>
+<h1 class="title">Estimating Robustness Using MCCV</h1>
 </div>
 
 
@@ -195,9 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Often, a question of interest is at what sample size (used in training a model) can I detect an effect? Furthermore, is the effect I’m detecting a robust signal? MCCV can estimate the power to detect an effect or robust signal by learning from data at different sizes of a sample. For example, a large effect or performance, say 0.8 AUROC, may be reached using all data available in the sample. However, can I still reach 0.8 AUROC at a smaller sample size? Also, is the detected signal robust to the size of the sample used in training the model? This article will show how learning from varying sample sizes may or may not show robust signal aka detection of an effect representative of the data generating process.</p>
+<p>Often, a question of interest is at what sample size (used in training a model) can I detect an effect? Furthermore, is the effect I’m detecting a robust signal? MCCV can estimate the robustness of an effect or signal by learning from data at different sizes of a sample. For example, a large effect or performance, say 0.8 AUROC, may be reached using all data available in the sample. However, can I still reach 0.8 AUROC at a smaller sample size? Also, is the detected signal robust to the size of the sample used in training the model or does a particular cut of the data drive model learning? This article will show how learning from varying sample sizes may or may not show robust signal aka detection of an effect representative of the data generating process.</p>
 <p>This first example defines two classes of data (class 1 and class 2) with a predictor drawn from very similar distributions. I expect robust signal (i.e.&nbsp;AUROC) to be detected as the proportion of samples increases:</p>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-1_0f58c2972ae3fd8a604471cdccebff7f">
+<div class="cell" data-hash="mccv_robust_cache/html/unnamed-chunk-1_e618a844c24687611c869bbbb9980231">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -216,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>df.index.name <span class="op">=</span> <span class="st">'pt'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-2_9db30d81c6f05f07d3449c891ff84da5">
+<div class="cell" data-hash="mccv_robust_cache/html/unnamed-chunk-2_ed9601945654e0636d62c4595390f1ca">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -235,10 +235,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="mccv_power_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<p><img src="mccv_robust_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-3_9f4e201b3fdc6e19d0cfdc2ba3a73b88">
+<div class="cell" data-hash="mccv_robust_cache/html/unnamed-chunk-3_241e272283385f7286ae19eb57fc05ad">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mccv</span>
@@ -256,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    perf_dfs.append(perf_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-4_3c612063f27a717152d60ebdb22ec86d">
+<div class="cell" data-hash="mccv_robust_cache/html/unnamed-chunk-4_f2829e1170799635af9f7acbdd0b8d3d">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span>py<span class="sc">$</span>perf_dfs <span class="sc">%&gt;%</span> </span>
@@ -274,11 +274,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="mccv_power_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="mccv_robust_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The second example, instead, defines two classes of data drawn from two different distributions. I would expect non-robust signal detected as the sample size for training is increased.</p>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-5_f3c52c873424b1d4ca99f6a9c144efd8">
+<div class="cell" data-hash="mccv_robust_cache/html/unnamed-chunk-5_9f6e3494503d146dbc651666d2276d9a">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -297,7 +297,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>df.index.name <span class="op">=</span> <span class="st">'pt'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-6_0da1af78aa269dd30dca1e731d1b7eeb">
+<div class="cell" data-hash="mccv_robust_cache/html/unnamed-chunk-6_4b978c12c4f11390e7bf0477abe35446">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -316,10 +316,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="mccv_power_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="mccv_robust_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-7_3cc8abd734fd8ad212ea2bc6114fcb25">
+<div class="cell" data-hash="mccv_robust_cache/html/unnamed-chunk-7_8f9c4ae566a39170c8438ad283cae8a9">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mccv</span>
@@ -337,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    perf_dfs.append(perf_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-8_17ae1e2234fe95d73a76d49038ab6630">
+<div class="cell" data-hash="mccv_robust_cache/html/unnamed-chunk-8_b30e2eaa1b9a3a1fc765930c84e44662">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span>py<span class="sc">$</span>perf_dfs <span class="sc">%&gt;%</span> </span>
@@ -354,7 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="mccv_power_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="mccv_robust_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>In short, my thinking is the data generating process is captured in a sample only if a robust signal is found. A robust signal can be represented by a linear, average increase in AUROC performance as sample size using for training increases. Otherwise, the signal-to-noise ratio is lower than what would be needed to make generalizable predictions from the specified model and data. In this last example, the evidence is unclear as expected whether the two classes of data are generated by the same process. I say this for two reasons:</p>

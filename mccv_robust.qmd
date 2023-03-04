@@ -1,12 +1,12 @@
 ---
-title: "Estimating Power Using MCCV"
+title: "Estimating Robustness Using MCCV"
 format:
   html:
     code-fold: true
     code-summary: 'Show The Code'
 ---
 
-Often, a question of interest is at what sample size (used in training a model) can I detect an effect? Furthermore, is the effect I'm detecting a robust signal? MCCV can estimate the power to detect an effect or robust signal by learning from data at different sizes of a sample. For example, a large effect or performance, say 0.8 AUROC, may be reached using all data available in the sample. However, can I still reach 0.8 AUROC at a smaller sample size? Also, is the detected signal robust to the size of the sample used in training the model? This article will show how learning from varying sample sizes may or may not show robust signal aka detection of an effect representative of the data generating process.
+Often, a question of interest is at what sample size (used in training a model) can I detect an effect? Furthermore, is the effect I'm detecting a robust signal? MCCV can estimate the robustness of an effect or signal by learning from data at different sizes of a sample. For example, a large effect or performance, say 0.8 AUROC, may be reached using all data available in the sample. However, can I still reach 0.8 AUROC at a smaller sample size? Also, is the detected signal robust to the size of the sample used in training the model or does a particular cut of the data drive model learning? This article will show how learning from varying sample sizes may or may not show robust signal aka detection of an effect representative of the data generating process.
 
 This first example defines two classes of data (class 1 and class 2) with a predictor drawn from very similar distributions. I expect robust signal (i.e. AUROC) to be detected as the proportion of samples increases:
 

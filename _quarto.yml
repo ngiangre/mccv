@@ -1,7 +1,6 @@
 project:
   type: website
   render:
-    - "*.ipynb"
     - "*.qmd"
   output-dir: docs
 
@@ -18,12 +17,7 @@ website:
       - overview.qmd
       - getting_started.qmd
       - find_confounding.qmd
-      - mccv_power.qmd
-    # right:
-    #   - href: Generating_Datasets_For_MCCV.ipynb
-    #     text: Biomarker Datasets
-    #   - href: Running_Biomarker_Predictions_By_MCCV.ipynb
-    #     text: Biomarker Predictions
+      - mccv_robust.qmd
 
 format:
   html:
