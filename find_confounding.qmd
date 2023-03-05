@@ -1,5 +1,5 @@
 ---
-title: "Identifying Confounders and Mediators with MCCV"
+title: "Identifying Confounders with MCCV"
 format:
   html:
     code-fold: true

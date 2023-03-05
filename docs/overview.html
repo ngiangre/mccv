@@ -93,11 +93,15 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./find_confounding.html">
- <span class="menu-text">Identifying Confounders and Mediators with MCCV</span></a>
+ <span class="menu-text">Identifying Confounders with MCCV</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./mccv_robust.html">
  <span class="menu-text">Estimating Robustness Using MCCV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./mccv_power.html">
+ <span class="menu-text">Estimating Power Using MCCV</span></a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -114,10 +118,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description">Description</a></li>
-  <li><a href="#related-methods" id="toc-related-methods" class="nav-link" data-scroll-target="#related-methods">Related Methods</a></li>
-  <li><a href="#procedural-overview" id="toc-procedural-overview" class="nav-link" data-scroll-target="#procedural-overview">Procedural overview</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
   <li><a href="#main-advantages" id="toc-main-advantages" class="nav-link" data-scroll-target="#main-advantages">Main advantages</a></li>
+  <li><a href="#procedural-overview" id="toc-procedural-overview" class="nav-link" data-scroll-target="#procedural-overview">Procedural overview</a></li>
+  <li><a href="#related-methods" id="toc-related-methods" class="nav-link" data-scroll-target="#related-methods">Related Methods</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -142,9 +146,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="description" class="level1">
-<h1>Description</h1>
-<p>This implementation of MCCV was developed to:</p>
+<section id="motivation" class="level1">
+<h1>Motivation</h1>
 <ol type="1">
 <li>Generate robust predictions for small data</li>
 <li>Evaluate variable or feature importance on all subpopulations of the data</li>
@@ -152,12 +155,12 @@ ul.task-list li input[type="checkbox"] {
 <li>Develop classifiers for validation on unseen data</li>
 </ol>
 </section>
-<section id="related-methods" class="level1">
-<h1>Related Methods</h1>
+<section id="main-advantages" class="level1">
+<h1>Main advantages</h1>
 <ul>
-<li><p>Monte-Carlo simulation (similar to <a href="https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit">ShuffleSplit in sklearn</a>)</p></li>
-<li><p>Cross-Validation (<a href="https://www.tmwr.org/resampling.html">tidymodels in R</a> and <a href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation">sklearn in python</a>)</p></li>
-<li><p><a href="https://rsample.tidymodels.org/reference/mc_cv.html"><em>mc_cv</em> from tidymodels in R</a>, but does not include additional cross validation as explained below</p></li>
+<li>Predictions are generated on many different training/validation data splits</li>
+<li>Variable or feature importances to the dependent variable are generalized over many subpopulations of the data</li>
+<li>Predictions of the observations have reduced variance and generalize to unseen observations</li>
 </ul>
 </section>
 <section id="procedural-overview" class="level1">
@@ -169,12 +172,12 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Performance metrics are generated using resamples (bootstrap with replacement) of the observation probabilities</p></li>
 </ul>
 </section>
-<section id="main-advantages" class="level1">
-<h1>Main advantages</h1>
+<section id="related-methods" class="level1">
+<h1>Related Methods</h1>
 <ul>
-<li>Predictions are generated on many different training/validation data splits</li>
-<li>Variable or feature importances to the dependent variable are generalized over many subpopulations of the data</li>
-<li>Predictions of the observations have reduced variance and generalize to unseen observations</li>
+<li><p>Monte-Carlo simulation (similar to <a href="https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit">ShuffleSplit in sklearn</a>)</p></li>
+<li><p>Cross-Validation (<a href="https://www.tmwr.org/resampling.html">tidymodels in R</a> and <a href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation">sklearn in python</a>)</p></li>
+<li><p><a href="https://rsample.tidymodels.org/reference/mc_cv.html"><em>mc_cv</em> from tidymodels in R</a>, but does not include additional cross validation as explained below</p></li>
 </ul>
 </section>
 <section id="references" class="level1">

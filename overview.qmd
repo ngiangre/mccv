@@ -2,22 +2,18 @@
 title: "Overview"
 ---
 
-# Description
-
-This implementation of MCCV was developed to:
+# Motivation
 
 1.  Generate robust predictions for small data
 2.  Evaluate variable or feature importance on all subpopulations of the data
 3.  Include prediction uncertainty and variance
 4.  Develop classifiers for validation on unseen data
 
-# Related Methods
+# Main advantages
 
--   Monte-Carlo simulation (similar to [ShuffleSplit in sklearn](https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit))
-
--   Cross-Validation ([tidymodels in R](https://www.tmwr.org/resampling.html) and [sklearn in python](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation))
-
--   [*mc_cv* from tidymodels in R](https://rsample.tidymodels.org/reference/mc_cv.html), but does not include additional cross validation as explained below
+-   Predictions are generated on many different training/validation data splits
+-   Variable or feature importances to the dependent variable are generalized over many subpopulations of the data
+-   Predictions of the observations have reduced variance and generalize to unseen observations
 
 # Procedural overview
 
@@ -29,11 +25,13 @@ This implementation of MCCV was developed to:
 
 -   Performance metrics are generated using resamples (bootstrap with replacement) of the observation probabilities
 
-# Main advantages
+# Related Methods
 
--   Predictions are generated on many different training/validation data splits
--   Variable or feature importances to the dependent variable are generalized over many subpopulations of the data
--   Predictions of the observations have reduced variance and generalize to unseen observations
+-   Monte-Carlo simulation (similar to [ShuffleSplit in sklearn](https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit))
+
+-   Cross-Validation ([tidymodels in R](https://www.tmwr.org/resampling.html) and [sklearn in python](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation))
+
+-   [*mc_cv* from tidymodels in R](https://rsample.tidymodels.org/reference/mc_cv.html), but does not include additional cross validation as explained below
 
 # References
 
