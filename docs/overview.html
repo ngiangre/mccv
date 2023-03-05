@@ -149,26 +149,27 @@ ul.task-list li input[type="checkbox"] {
 <section id="motivation" class="level1">
 <h1>Motivation</h1>
 <ol type="1">
-<li>Generate robust predictions for small data</li>
+<li>Estimate predictions for small data</li>
 <li>Evaluate variable or feature importance on all subpopulations of the data</li>
-<li>Include prediction uncertainty and variance</li>
-<li>Develop classifiers for validation on unseen data</li>
+<li>Generate prediction uncertainty and variance</li>
+<li>Develop classifiers based on unseen data</li>
 </ol>
 </section>
 <section id="main-advantages" class="level1">
 <h1>Main advantages</h1>
 <ul>
 <li>Predictions are generated on many different training/validation data splits</li>
-<li>Variable or feature importances to the dependent variable are generalized over many subpopulations of the data</li>
-<li>Predictions of the observations have reduced variance and generalize to unseen observations</li>
+<li>Predictor or feature importances to the dependent variable are generalized over many subpopulations of the data</li>
+<li>No data leakage - Predictions are on observations not included during training</li>
 </ul>
 </section>
 <section id="procedural-overview" class="level1">
 <h1>Procedural overview</h1>
 <ul>
 <li><p>Monte Carlo simulation splits the data into training and validation sets</p></li>
-<li><p>10-fold cross validation on the <em>training set</em> is used to estimate “good” model hyperparameters</p></li>
-<li><p>The model with the “good” hyperparameters is fit on the training set and predictions are made on the yet-to-be-seen validation set</p></li>
+<li><p>10-fold cross validation on the <em>training set</em> is used to estimate “good” model parameters</p></li>
+<li><p>The model with the “good” parameters is fit on the entire training set</p></li>
+<li><p>The refitted model predicts the yet-to-be-seen validation set</p></li>
 <li><p>Performance metrics are generated using resamples (bootstrap with replacement) of the observation probabilities</p></li>
 </ul>
 </section>
@@ -177,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><p>Monte-Carlo simulation (similar to <a href="https://scikit-learn.org/stable/modules/cross_validation.html#shufflesplit">ShuffleSplit in sklearn</a>)</p></li>
 <li><p>Cross-Validation (<a href="https://www.tmwr.org/resampling.html">tidymodels in R</a> and <a href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation">sklearn in python</a>)</p></li>
-<li><p><a href="https://rsample.tidymodels.org/reference/mc_cv.html"><em>mc_cv</em> from tidymodels in R</a>, but does not include additional cross validation as explained below</p></li>
+<li><p><a href="https://rsample.tidymodels.org/reference/mc_cv.html"><em>mc_cv</em> from tidymodels in R</a>, but does not include additional cross validation as explained above</p></li>
 </ul>
 </section>
 <section id="references" class="level1">

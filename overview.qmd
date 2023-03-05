@@ -4,24 +4,26 @@ title: "Overview"
 
 # Motivation
 
-1.  Generate robust predictions for small data
+1.  Estimate predictions for small data
 2.  Evaluate variable or feature importance on all subpopulations of the data
-3.  Include prediction uncertainty and variance
-4.  Develop classifiers for validation on unseen data
+3.  Generate prediction uncertainty and variance
+4.  Develop classifiers based on unseen data
 
 # Main advantages
 
 -   Predictions are generated on many different training/validation data splits
--   Variable or feature importances to the dependent variable are generalized over many subpopulations of the data
--   Predictions of the observations have reduced variance and generalize to unseen observations
+-   Predictor or feature importances to the dependent variable are generalized over many subpopulations of the data
+-   No data leakage - Predictions are on observations not included during training
 
 # Procedural overview
 
 -   Monte Carlo simulation splits the data into training and validation sets
 
--   10-fold cross validation on the *training set* is used to estimate "good" model hyperparameters
+-   10-fold cross validation on the *training set* is used to estimate "good" model parameters
 
--   The model with the "good" hyperparameters is fit on the training set and predictions are made on the yet-to-be-seen validation set
+-   The model with the "good" parameters is fit on the entire training set
+
+-   The refitted model predicts the yet-to-be-seen validation set
 
 -   Performance metrics are generated using resamples (bootstrap with replacement) of the observation probabilities
 
@@ -31,7 +33,7 @@ title: "Overview"
 
 -   Cross-Validation ([tidymodels in R](https://www.tmwr.org/resampling.html) and [sklearn in python](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation))
 
--   [*mc_cv* from tidymodels in R](https://rsample.tidymodels.org/reference/mc_cv.html), but does not include additional cross validation as explained below
+-   [*mc_cv* from tidymodels in R](https://rsample.tidymodels.org/reference/mc_cv.html), but does not include additional cross validation as explained above
 
 # References
 
