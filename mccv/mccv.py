@@ -178,9 +178,10 @@ class mccv(object):
             "Logistic Regression": linear_model.LogisticRegression(
                 C=1000000,
                 penalty="l2",
-                solver="liblinear",
+                solver="saga",
                 tol=1e-3,
                 random_state=self.seed,
+                warm_start=True
             ),
             "Random Forest": ensemble.RandomForestClassifier(
                 criterion="gini",
@@ -192,9 +193,14 @@ class mccv(object):
                 oob_score=True,
                 n_jobs=self.n_jobs,
                 random_state=self.seed,
+                warm_start=True
             ),
             "Support Vector Machine": svm.SVC(
-                C=1, kernel="linear", random_state=self.seed, probability=True, tol=1e-3
+                C=1, 
+                kernel="linear", 
+                random_state=self.seed, 
+                probability=True, 
+                tol=1e-3
             ),
             "Gradient Boosting Classifier": ensemble.GradientBoostingClassifier(
                 n_estimators=100,
@@ -204,6 +210,7 @@ class mccv(object):
                 min_samples_leaf=2,
                 min_samples_split=2,
                 random_state=self.seed,
+                warm_start=True
             ),
         }
 

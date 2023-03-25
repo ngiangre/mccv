@@ -12,6 +12,8 @@ Refitting the model per learned parameters from K-fold cross validation during t
 #| warning: false
 #| cache: true
 import numpy as np
+import scipy as sc
+import pandas as pd
 
 N=100
 np.random.seed(0)
@@ -20,10 +22,7 @@ np.random.seed(0)
 Z2 = np.random.beta(2,2.5,size=N)
 Z = np.concatenate([Z1,Z2])
 
-import scipy as sc
 Y = np.concatenate([np.repeat(0,N),np.repeat(1,N)])
-
-import pandas as pd
 df = pd.DataFrame(data={'Y' : Y,'Z' : Z})
 df.index.name = 'pt'
 ```
@@ -31,7 +30,6 @@ df.index.name = 'pt'
 ```{r}
 #| warning: false
 library(tidyverse)
-
 df <- tibble::tibble(
     Y = reticulate::py$Y,
     Z = reticulate::py$Z
@@ -111,9 +109,9 @@ avg_values %>%
 
 ```
 
-We learned that on average when X is 0, there is a `r intercept_ = dplyr::pull(dplyr::filter(avg_values,name=="Intercept"),"Average Value")` `r round(intercept_,2)` log of the odds or `r round(exp(intercept_),2)` odds or `r round(exp(intercept_)/(1+exp(intercept_)),2)` probability to be in the outcome group (Y=1).
+We learned that on average when the predictor is 0, there is a `r intercept_ = dplyr::pull(dplyr::filter(avg_values,name=="Intercept"),"Average Value")` `r round(intercept_,2)` log of the odds or `r round(exp(intercept_),2)` odds or `r round(exp(intercept_)/(1+exp(intercept_)),2)` probability to be in the outcome group (Y=1).
 
-On average, there is a `r coef_ = dplyr::pull(dplyr::filter(avg_values,name=="Coefficient"),"Average Value")` `r round(coef_,2)` expected change in the log of the odds or `r round(exp(coef_),2)` odds for a one-unit increase in X. In other words, we expect to see a `r paste0(round(exp(coef_)/(1+exp(coef_)),2)*100,"%")` increase in the odds of being in the outcome group (Y=1) as X increases by one-unit.
+On average, there is a `r coef_ = dplyr::pull(dplyr::filter(avg_values,name=="Coefficient"),"Average Value")` `r round(coef_,2)` expected change in the log of the odds or `r round(exp(coef_),2)` odds for a one-unit increase in the predictor. In other words, we expect to see a `r paste0(round(exp(coef_)/(1+exp(coef_)),2)*100,"%")` increase in the odds of being in the outcome group (Y=1) as the predictor increases by one-unit.
 
 ```{r}
 library(gganimate)
