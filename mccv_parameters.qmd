@@ -6,9 +6,11 @@ format:
     code-summary: 'Show The Code'
 ---
 
+Refitting the model per learned parameters from K-fold cross validation during training is a key step in the Monte Carlo Cross Validation (MCCV) methodology. However, the `run_mccv()` function that runs the entire MCCV procedure does not return these learned parameters. In this article, the learned parameters are extracted from 10-fold cross validation of a Logistic Regression model. These learned parameters are 200 intercepts and coefficients later refit to the entire training set. Here, we visualize the distribution of the learned parameters to illustrate the learning process.
 
 ```{python}
 #| warning: false
+#| cache: true
 import numpy as np
 
 N=100
@@ -45,6 +47,7 @@ df %>%
 ```
 
 ```{python}
+#| cache: true
 import mccv
 import pandas as pd
 
@@ -96,11 +99,21 @@ p <-
     )
 
 p + 
-    stat_summary(fun.y=mean,color='red',geom='line',aes(group=1),linewidth=3) +
+    stat_summary(fun=mean,color='red',geom='line',aes(group=1),linewidth=3) +
     labs(caption='Estimated Parameters From 200 Logistic Regression Bootstraps\nAverage in Red')
     
+avg_values <- 
+    summarise(plot_dat,`Average Value` = mean(value),.by=name) %>% 
+    mutate(across(where(is.numeric),function(x)round(x,2)))
+
+avg_values %>% 
+    gt::gt()
 
 ```
+
+We learned that on average when X is 0, there is a `r intercept_ = dplyr::pull(dplyr::filter(avg_values,name=="Intercept"),"Average Value")` `r round(intercept_,2)` log of the odds or `r round(exp(intercept_),2)` odds or `r round(exp(intercept_)/(1+exp(intercept_)),2)` probability to be in the outcome group (Y=1).
+
+On average, there is a `r coef_ = dplyr::pull(dplyr::filter(avg_values,name=="Coefficient"),"Average Value")` `r round(coef_,2)` expected change in the log of the odds or `r round(exp(coef_),2)` odds for a one-unit increase in X. In other words, we expect to see a `r paste0(round(exp(coef_)/(1+exp(coef_)),2)*100,"%")` increase in the odds of being in the outcome group (Y=1) as X increases by one-unit.
 
 ```{r}
 library(gganimate)

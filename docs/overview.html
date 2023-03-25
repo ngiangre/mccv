@@ -171,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 <h1>Procedural overview</h1>
 <ul>
 <li><p>Monte Carlo simulation splits the data into training and validation sets</p></li>
-<li><p>10-fold cross validation on the <em>training set</em> is used to estimate “good” model parameters</p></li>
+<li><p>K-fold cross validation (10 by default) on the <em>training set</em> is used to estimate “good” model parameters</p></li>
 <li><p>The model with the “good” parameters is fit on the entire training set</p></li>
 <li><p>The refitted model predicts the yet-to-be-seen validation set</p></li>
 <li><p>Performance metrics are generated using resamples (bootstrap with replacement) of the observation probabilities</p></li>
