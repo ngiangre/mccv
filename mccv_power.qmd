@@ -1,5 +1,5 @@
 ---
-title: "Estimating Power Using MCCV"
+title: "Estimating Power"
 format:
   html:
     code-fold: true

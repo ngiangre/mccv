@@ -1,5 +1,5 @@
 ---
-title: "Identifying Confounders with MCCV"
+title: "Identifying Confounders"
 format:
   html:
     code-fold: true

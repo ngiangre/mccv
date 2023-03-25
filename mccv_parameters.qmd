@@ -1,0 +1,114 @@
+---
+title: "Learning Parameters"
+format:
+  html:
+    code-fold: true
+    code-summary: 'Show The Code'
+---
+
+
+```{python}
+#| warning: false
+import numpy as np
+
+N=100
+np.random.seed(0)
+Z1 = np.random.beta(2,3,size=N,)
+np.random.seed(0)
+Z2 = np.random.beta(2,2.5,size=N)
+Z = np.concatenate([Z1,Z2])
+
+import scipy as sc
+Y = np.concatenate([np.repeat(0,N),np.repeat(1,N)])
+
+import pandas as pd
+df = pd.DataFrame(data={'Y' : Y,'Z' : Z})
+df.index.name = 'pt'
+```
+
+```{r}
+#| warning: false
+library(tidyverse)
+
+df <- tibble::tibble(
+    Y = reticulate::py$Y,
+    Z = reticulate::py$Z
+)
+df[['Y']] <- factor(df$Y,levels=c(0,1))
+
+df %>% 
+    ggplot(aes(Y,Z)) +
+    geom_boxplot(outlier.size = NA,alpha=0,linewidth=2) +
+    geom_point(position = position_jitter(width = .2),pch=21,fill='gray',size=3) +
+    labs(x = "Response",y="Predictor") +
+    theme_bw(base_size = 16)
+```
+
+```{python}
+import mccv
+import pandas as pd
+
+mccv_obj = mccv.mccv(num_bootstraps=200,n_jobs=4)    
+mccv_obj.set_X(df[['Z']])
+mccv_obj.set_Y(df[['Y']])
+
+param_dfs=[]
+for seed in range(200):
+    retrained_fit = mccv_obj.mccv(seed)[1]['Logistic Regression'].__dict__
+    param_dict = {k : retrained_fit[k].reshape(-1)[0] for k in ('coef_','intercept_')}
+    param_df = pd.DataFrame.from_dict(param_dict,orient='index',dtype='object',columns=[seed])
+    param_dfs.append(param_df)
+retrained_parameters_df = pd.concat(param_dfs,axis=1).T
+retrained_parameters_df.index.name='seed'
+retrained_parameters_df.reset_index(inplace=True)
+
+```
+
+```{r}
+library(tidyverse)
+
+plot_dat <- 
+    reticulate::py$retrained_parameters_df %>% 
+    pivot_longer(
+        cols = contains('_')
+    ) %>% 
+    mutate(
+        seed = as.integer(seed),
+        name = factor(name,levels=c("intercept_","coef_"),labels=c("Intercept","Coefficient")),
+        value = as.double(value)
+        )
+
+p <- 
+    plot_dat %>% 
+    ggplot(aes(name,value,group=seed)) +
+    geom_line() +
+    scale_x_discrete(
+        expand = expansion(0.01,0.01),
+        name=NULL
+    ) +
+    scale_y_continuous(
+        name="Parameter Values"
+    ) +
+    labs(caption='Estimated Parameters From 200 Logistic Regression Bootstraps') +
+    theme_bw(base_size = 20) +
+    theme(
+        axis.text.x = element_text(angle=45,hjust=1,vjust=1)
+    )
+
+p + 
+    stat_summary(fun.y=mean,color='red',geom='line',aes(group=1),linewidth=3) +
+    labs(caption='Estimated Parameters From 200 Logistic Regression Bootstraps\nAverage in Red')
+    
+
+```
+
+```{r}
+library(gganimate)
+#install.packages("transformr")
+animp <- 
+    p + 
+    transition_time(seed) + 
+    labs(title="Seed : {frame_time}")
+animate(animp,duration = 5, fps = 20, width = 500, height = 500, renderer = gifski_renderer())
+anim_save("mccv_parameters_animation.gif")
+```

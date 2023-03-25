@@ -19,6 +19,7 @@ website:
       - find_confounding.qmd
       - mccv_robust.qmd
       - mccv_power.qmd
+      - mccv_parameters.qmd
 
 format:
   html:
