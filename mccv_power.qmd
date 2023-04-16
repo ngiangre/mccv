@@ -46,7 +46,7 @@ df %>%
     ggplot(aes(Y,X)) +
     geom_boxplot(outlier.size = NA,alpha=0,linewidth=2) +
     geom_point(position = position_jitter(width = .2),pch=21,fill='gray',size=3) +
-    labs(x = "Response",y="Predictor",title = "Predictor for Class One is 50% larger on average") +
+    labs(x = "Response",y="Predictor",title = "Predictor values for Class One are 50% larger on average") +
     theme_bw(base_size = 16)
 ```
 
@@ -265,7 +265,7 @@ df %>%
     ggplot(aes(Y,X)) +
     geom_boxplot(outlier.size = NA,alpha=0,linewidth=2) +
     geom_point(position = position_jitter(width = .2),pch=21,fill='gray',size=3) +
-    labs(x = "Response",y="Predictor",title = "Predictor for Class One is 200% larger on average") +
+    labs(x = "Response",y="Predictor",title = "Predictor values for Class One are 200% larger on average") +
     theme_bw(base_size = 16)
 ```
 

@@ -5,7 +5,7 @@ project:
   output-dir: docs
 
 execute:
-  cache: true
+  cache: false
   freeze: auto
 
 website:

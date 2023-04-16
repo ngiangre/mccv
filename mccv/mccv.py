@@ -338,7 +338,7 @@ class mccv(object):
             pd.concat(model_confs, sort=True),
         )
 
-    def _permute_Y(self, seed):
+    def _permute_Y(self, Y, seed):
         """
         Shuffle Y values.
 
@@ -364,8 +364,8 @@ class mccv(object):
         NULL
 
         """
-        arr = shuffle(self.Y.values, random_state=seed)
-        arr_shuffle = pd.Series(arr.reshape(1, -1)[0], index=self.Y.index)
+        arr = shuffle(Y.values, random_state=seed)
+        arr_shuffle = pd.Series(arr.reshape(1, -1)[0], index=Y.index)
         return arr_shuffle
 
     def permuted_mccv(self, seed):
@@ -394,7 +394,7 @@ class mccv(object):
 
         """
         X = self.X.loc[self.Y.index]
-        Y_shuffle = self._permute_Y(seed=seed)
+        Y_shuffle = self._permute_Y(Y=self.Y,seed=seed)
         X_shuffle = X.loc[Y_shuffle.index]
         # 1/ train and test split
         X = X_shuffle.loc[Y_shuffle.index]

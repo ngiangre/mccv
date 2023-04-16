@@ -215,7 +215,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>I will discuss at the end how the term ‘power’ is used here in comparison to the statistical and more common form of the term. First, I will show two examples showing the power of X to predict Y.</p>
 <p>This first example shows low power</p>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-1_7fdc43960334f5c4e4ddd753aeb34d5d">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -230,7 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df.index.name <span class="op">=</span> <span class="st">'pt'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-2_9e285db1e00f9bed95e17461d97aed88">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -243,14 +243,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(Y,X)) <span class="sc">+</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">outlier.size =</span> <span class="cn">NA</span>,<span class="at">alpha=</span><span class="dv">0</span>,<span class="at">linewidth=</span><span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>),<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">'gray'</span>,<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Response"</span>,<span class="at">y=</span><span class="st">"Predictor"</span>,<span class="at">title =</span> <span class="st">"Predictor for Class One is 50% larger on average"</span>) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Response"</span>,<span class="at">y=</span><span class="st">"Predictor"</span>,<span class="at">title =</span> <span class="st">"Predictor values for Class One are 50% larger on average"</span>) <span class="sc">+</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="mccv_power_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-3_d0062c3c794ba1820de72d0ef2066d22">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mccv</span>
@@ -318,7 +318,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-4_1caccc7cf733577f9c88fe2cdc0f2674">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pks <span class="ot">&lt;-</span> </span>
@@ -361,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="mccv_power_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-5_d5068d660d3e9bcc6e4d424a9036e53d">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pks <span class="ot">&lt;-</span> </span>
@@ -400,7 +400,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="mccv_power_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-6_78c4e47c3c3d9cb6eec8cf2d6d3a98de">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pks <span class="ot">&lt;-</span> </span>
@@ -444,7 +444,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>This next example shows high power</p>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-7_de168bd722785b273f57618c65159788">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -459,7 +459,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>df.index.name <span class="op">=</span> <span class="st">'pt'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-8_5698545f97e7160189090524cc9223c4">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -472,14 +472,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(Y,X)) <span class="sc">+</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">outlier.size =</span> <span class="cn">NA</span>,<span class="at">alpha=</span><span class="dv">0</span>,<span class="at">linewidth=</span><span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>),<span class="at">pch=</span><span class="dv">21</span>,<span class="at">fill=</span><span class="st">'gray'</span>,<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Response"</span>,<span class="at">y=</span><span class="st">"Predictor"</span>,<span class="at">title =</span> <span class="st">"Predictor for Class One is 200% larger on average"</span>) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Response"</span>,<span class="at">y=</span><span class="st">"Predictor"</span>,<span class="at">title =</span> <span class="st">"Predictor values for Class One are 200% larger on average"</span>) <span class="sc">+</span></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="mccv_power_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-9_35840118d7d3ef597961b84d22ee10bb">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mccv</span>
@@ -547,7 +547,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-10_373cd552f35c7d3581438b2803ce308c">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pks <span class="ot">&lt;-</span> </span>
@@ -590,7 +590,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="mccv_power_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-11_9c1fc785dbcec8c9eb57cdab25987766">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pks <span class="ot">&lt;-</span> </span>
@@ -629,7 +629,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="mccv_power_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="mccv_power_cache/html/unnamed-chunk-12_430ebe34132e176c2c4ec30eba1cac1e">
+<div class="cell">
 <details>
 <summary>Show The Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pks <span class="ot">&lt;-</span> </span>
