@@ -123,3 +123,83 @@ animp <-
 animate(animp,duration = 5, fps = 20, width = 500, height = 500, renderer = gifski_renderer())
 anim_save("mccv_parameters_animation.gif")
 ```
+
+On the other hand, MCCV is unable to learn stable parameter values when the data is shuffled:
+
+```{python}
+#| cache: true
+import mccv
+import pandas as pd
+
+mccv_obj = mccv.mccv(num_bootstraps=200,n_jobs=4)    
+mccv_obj.set_X(df[['Z']])
+mccv_obj.set_Y(df[['Y']])
+
+param_dfs=[]
+for seed in range(200):
+    retrained_fit = mccv_obj.permuted_mccv(seed)[1]['Logistic Regression'].__dict__
+    param_dict = {k : retrained_fit[k].reshape(-1)[0] for k in ('coef_','intercept_')}
+    param_df = pd.DataFrame.from_dict(param_dict,orient='index',dtype='object',columns=[seed])
+    param_dfs.append(param_df)
+retrained_parameters_df = pd.concat(param_dfs,axis=1).T
+retrained_parameters_df.index.name='seed'
+retrained_parameters_df.reset_index(inplace=True)
+
+```
+
+```{r}
+library(tidyverse)
+
+plot_dat <- 
+    reticulate::py$retrained_parameters_df %>% 
+    pivot_longer(
+        cols = contains('_')
+    ) %>% 
+    mutate(
+        seed = as.integer(seed),
+        name = factor(name,levels=c("intercept_","coef_"),labels=c("Intercept","Coefficient")),
+        value = as.double(value)
+        )
+
+p <- 
+    plot_dat %>% 
+    ggplot(aes(name,value,group=seed)) +
+    geom_line() +
+    scale_x_discrete(
+        expand = expansion(0.01,0.01),
+        name=NULL
+    ) +
+    scale_y_continuous(
+        name="Parameter Values"
+    ) +
+    labs(caption='Permuted MCCV\nEstimated Parameters From 200 Logistic Regression Bootstraps') +
+    theme_bw(base_size = 20) +
+    theme(
+        axis.text.x = element_text(angle=45,hjust=1,vjust=1)
+    )
+
+p + 
+    stat_summary(fun=mean,color='red',geom='line',aes(group=1),linewidth=3) +
+    labs(caption='Permuted MCCV\nEstimated Parameters From 200 Logistic Regression Bootstraps\nAverage in Red')
+    
+avg_values <- 
+    summarise(plot_dat,`Average Value` = mean(value),.by=name) %>% 
+    mutate(across(where(is.numeric),function(x)round(x,2)))
+
+avg_values %>% 
+    gt::gt()
+
+```
+
+```{r}
+library(gganimate)
+#install.packages("transformr")
+animp <- 
+    p + 
+    transition_time(seed) + 
+    labs(title="Seed : {frame_time}")
+animate(animp,duration = 5, fps = 20, width = 500, height = 500, renderer = gifski_renderer())
+anim_save("permuted_mccv_parameters_animation.gif")
+```
+
+The distribution of parameters from the permuted MCCV provides a null distribution. The alternative hypothesis is learned parameters from MCCV (using the real data) is different from parameters estimated from permuted MCCV (using shuffled data). 
