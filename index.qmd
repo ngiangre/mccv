@@ -2,9 +2,7 @@
 title: "Monte Carlo Cross Validation"
 ---
 
-## ⚠️ Work In Progress! ⚠️
-
-# Robust and interpretable prediction
+# Evidentiary and interpretable prediction
 
 Binary and Multi-classification algorithm for adverse outcome detection, survival classification, and endpoint prediction (see references for details)
 

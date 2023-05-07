@@ -185,8 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#work-in-progress" id="toc-work-in-progress" class="nav-link active" data-scroll-target="#work-in-progress">⚠️ Work In Progress! ⚠️</a></li>
-  <li><a href="#robust-and-interpretable-prediction" id="toc-robust-and-interpretable-prediction" class="nav-link" data-scroll-target="#robust-and-interpretable-prediction">Robust and interpretable prediction</a></li>
+  <li><a href="#evidentiary-and-interpretable-prediction" id="toc-evidentiary-and-interpretable-prediction" class="nav-link active" data-scroll-target="#evidentiary-and-interpretable-prediction">Evidentiary and interpretable prediction</a></li>
   <li><a href="#objectives-of-this-project" id="toc-objectives-of-this-project" class="nav-link" data-scroll-target="#objectives-of-this-project">Objectives of this project</a></li>
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
@@ -216,11 +215,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="work-in-progress" class="level2">
-<h2 class="anchored" data-anchor-id="work-in-progress">⚠️ Work In Progress! ⚠️</h2>
-</section>
-<section id="robust-and-interpretable-prediction" class="level1">
-<h1>Robust and interpretable prediction</h1>
+<section id="evidentiary-and-interpretable-prediction" class="level1">
+<h1>Evidentiary and interpretable prediction</h1>
 <p>Binary and Multi-classification algorithm for adverse outcome detection, survival classification, and endpoint prediction (see references for details)</p>
 <p><img src="MCCV_prediction_scheme.png" class="img-fluid"></p>
 </section>
@@ -246,7 +242,7 @@ python3 -m pip install .</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Python</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">R</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-1_6e5bb6a79c795f41df16488fbc4adb77">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'data/data.csv'</span>,index_col<span class="op">=</span><span class="dv">0</span>) <span class="co"># Feature column name is 'biomarker' and response column  name is 'status'</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -260,7 +256,7 @@ obs
 5         1   0.189857</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_0e1601e728c67e7c1f897329659653b5">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mccv</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mccv_obj <span class="op">=</span> mccv.mccv(num_bootstraps<span class="op">=</span><span class="dv">200</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mccv_obj.set_X( data.loc[:,[<span class="st">'biomarker'</span>]] )</span>
@@ -284,26 +280,26 @@ obs
 [5 rows x 5 columns]
 Feature Importance
    bootstrap    feature  importance                model
-0          0  biomarker    1.010712  Logistic Regression
-1          0  Intercept   -0.599959  Logistic Regression
-0          1  biomarker    0.509404  Logistic Regression
-1          1  Intercept   -0.226465  Logistic Regression
-0          2  biomarker    1.591529  Logistic Regression
+0          0  biomarker    1.009705  Logistic Regression
+1          0  Intercept   -0.598575  Logistic Regression
+0          1  biomarker    0.509433  Logistic Regression
+1          1  Intercept   -0.226550  Logistic Regression
+0          2  biomarker    1.598627  Logistic Regression
 Patient Predictions
      bootstrap                model  y_pred   y_proba  y_true
 obs                                                          
-27           0  Logistic Regression       0  0.384426       1
-87           0  Logistic Regression       1  0.601268       0
-3            0  Logistic Regression       0  0.401035       0
-56           0  Logistic Regression       1  0.512297       1
-76           0  Logistic Regression       0  0.392718       0
+27           0  Logistic Regression       0  0.384723       1
+87           0  Logistic Regression       1  0.601359       0
+3            0  Logistic Regression       0  0.401320       0
+56           0  Logistic Regression       1  0.512481       1
+76           0  Logistic Regression       0  0.393009       0
 Performance
                  model   metric  performance_bootstrap     value
-0  Logistic Regression  roc_auc                      0  0.468092
-1  Logistic Regression  roc_auc                      1  0.467906
-2  Logistic Regression  roc_auc                      2  0.481271
-3  Logistic Regression  roc_auc                      3  0.481514
-4  Logistic Regression  roc_auc                      4  0.476277</code></pre>
+0  Logistic Regression  roc_auc                      0  0.467487
+1  Logistic Regression  roc_auc                      1  0.467776
+2  Logistic Regression  roc_auc                      2  0.480176
+3  Logistic Regression  roc_auc                      3  0.480679
+4  Logistic Regression  roc_auc                      4  0.475859</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> mccv_obj.mccv_permuted_data:</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(n)</span>
@@ -320,31 +316,31 @@ Performance
 [5 rows x 5 columns]
 Feature Importance
    bootstrap    feature  importance                model
-0          0  biomarker   -0.195845  Logistic Regression
-1          0  Intercept    0.078774  Logistic Regression
-0          1  biomarker   -0.630019  Logistic Regression
-1          1  Intercept    0.238267  Logistic Regression
-0          2  biomarker    0.165976  Logistic Regression
+0          0  biomarker   -0.196116  Logistic Regression
+1          0  Intercept    0.079220  Logistic Regression
+0          1  biomarker   -0.628093  Logistic Regression
+1          1  Intercept    0.236617  Logistic Regression
+0          2  biomarker    0.166196  Logistic Regression
 Patient Predictions
      bootstrap                model  y_pred   y_proba  y_true
 obs                                                          
-27           0  Logistic Regression       1  0.513434       1
-87           0  Logistic Regression       0  0.470765       0
-3            0  Logistic Regression       1  0.510061       0
-56           0  Logistic Regression       0  0.488249       1
-76           0  Logistic Regression       1  0.511744       1
+27           0  Logistic Regression       1  0.513536       1
+87           0  Logistic Regression       0  0.470809       0
+3            0  Logistic Regression       1  0.510160       0
+56           0  Logistic Regression       0  0.488317       1
+76           0  Logistic Regression       1  0.511844       1
 Performance
                  model   metric  performance_bootstrap     value
-0  Logistic Regression  roc_auc                      0  0.439984
-1  Logistic Regression  roc_auc                      1  0.442234
-2  Logistic Regression  roc_auc                      2  0.449432
-3  Logistic Regression  roc_auc                      3  0.439897
-4  Logistic Regression  roc_auc                      4  0.449552</code></pre>
+0  Logistic Regression  roc_auc                      0  0.440616
+1  Logistic Regression  roc_auc                      1  0.442506
+2  Logistic Regression  roc_auc                      2  0.449941
+3  Logistic Regression  roc_auc                      3  0.440162
+4  Logistic Regression  roc_auc                      4  0.449896</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-3_290016333eb7ccb13f49972e8e644ae8">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"readr"</span>)){<span class="fu">install.packages</span>(<span class="st">"readr"</span>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required namespace: readr</code></pre>
@@ -364,7 +360,7 @@ Performance
 6     6      0     2.20 </code></pre>
 </div>
 </div>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-4_3730cfee05f8ca9cc9778bdeed6c6013">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"reticulate"</span>)){<span class="fu">install.packages</span>(<span class="st">"reticulate"</span>)}</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mccv <span class="ot">=</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">'mccv'</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>mccv_obj <span class="ot">=</span> mccv<span class="sc">$</span><span class="fu">mccv</span>(<span class="at">num_bootstraps =</span> <span class="fu">as.integer</span>(<span class="dv">200</span>))</span>
@@ -401,30 +397,30 @@ duplicated values: row names not set</code></pre>
 
 $`Feature Importance`
   bootstrap   feature importance               model
-1         0 biomarker  1.0107122 Logistic Regression
-2         0 Intercept -0.5999590 Logistic Regression
-3         1 biomarker  0.5094043 Logistic Regression
-4         1 Intercept -0.2264652 Logistic Regression
-5         2 biomarker  1.5915295 Logistic Regression
-6         2 Intercept -0.9376893 Logistic Regression
+1         0 biomarker  1.0097049 Logistic Regression
+2         0 Intercept -0.5985751 Logistic Regression
+3         1 biomarker  0.5094328 Logistic Regression
+4         1 Intercept -0.2265503 Logistic Regression
+5         2 biomarker  1.5986271 Logistic Regression
+6         2 Intercept -0.9420031 Logistic Regression
 
 $`Patient Predictions`
   bootstrap               model y_pred   y_proba y_true
-1         0 Logistic Regression      0 0.3844259      1
-2         0 Logistic Regression      1 0.6012685      0
-3         0 Logistic Regression      0 0.4010353      0
-4         0 Logistic Regression      1 0.5122970      1
-5         0 Logistic Regression      0 0.3927179      0
-6         0 Logistic Regression      0 0.4658372      1
+1         0 Logistic Regression      0 0.3847230      1
+2         0 Logistic Regression      1 0.6013587      0
+3         0 Logistic Regression      0 0.4013202      0
+4         0 Logistic Regression      1 0.5124811      1
+5         0 Logistic Regression      0 0.3930090      0
+6         0 Logistic Regression      0 0.4660667      1
 
 $Performance
                 model  metric performance_bootstrap     value
-1 Logistic Regression roc_auc                     0 0.4680915
-2 Logistic Regression roc_auc                     1 0.4679058
-3 Logistic Regression roc_auc                     2 0.4812715
-4 Logistic Regression roc_auc                     3 0.4815138
-5 Logistic Regression roc_auc                     4 0.4762772
-6 Logistic Regression roc_auc                     5 0.4696288</code></pre>
+1 Logistic Regression roc_auc                     0 0.4674874
+2 Logistic Regression roc_auc                     1 0.4677764
+3 Logistic Regression roc_auc                     2 0.4801763
+4 Logistic Regression roc_auc                     3 0.4806793
+5 Logistic Regression roc_auc                     4 0.4758592
+6 Logistic Regression roc_auc                     5 0.4687351</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(mccv_obj<span class="sc">$</span>mccv_permuted_data,head)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -446,30 +442,30 @@ duplicated values: row names not set</code></pre>
 
 $`Feature Importance`
   bootstrap   feature  importance               model
-1         0 biomarker -0.19584525 Logistic Regression
-2         0 Intercept  0.07877354 Logistic Regression
-3         1 biomarker -0.63001932 Logistic Regression
-4         1 Intercept  0.23826705 Logistic Regression
-5         2 biomarker  0.16597553 Logistic Regression
-6         2 Intercept -0.01437680 Logistic Regression
+1         0 biomarker -0.19611610 Logistic Regression
+2         0 Intercept  0.07921951 Logistic Regression
+3         1 biomarker -0.62809256 Logistic Regression
+4         1 Intercept  0.23661698 Logistic Regression
+5         2 biomarker  0.16619555 Logistic Regression
+6         2 Intercept -0.01455491 Logistic Regression
 
 $`Patient Predictions`
   bootstrap               model y_pred   y_proba y_true
-1         0 Logistic Regression      1 0.5134336      1
-2         0 Logistic Regression      0 0.4707655      0
-3         0 Logistic Regression      1 0.5100614      0
-4         0 Logistic Regression      0 0.4882488      1
-5         0 Logistic Regression      1 0.5117439      1
-6         0 Logistic Regression      0 0.4972600      1
+1         0 Logistic Regression      1 0.5135363      1
+2         0 Logistic Regression      0 0.4708091      0
+3         0 Logistic Regression      1 0.5101595      0
+4         0 Logistic Regression      0 0.4883168      1
+5         0 Logistic Regression      1 0.5118443      1
+6         0 Logistic Regression      0 0.4973405      1
 
 $Performance
                 model  metric performance_bootstrap     value
-1 Logistic Regression roc_auc                     0 0.4399838
-2 Logistic Regression roc_auc                     1 0.4422338
-3 Logistic Regression roc_auc                     2 0.4494321
-4 Logistic Regression roc_auc                     3 0.4398971
-5 Logistic Regression roc_auc                     4 0.4495525
-6 Logistic Regression roc_auc                     5 0.4435271</code></pre>
+1 Logistic Regression roc_auc                     0 0.4406164
+2 Logistic Regression roc_auc                     1 0.4425061
+3 Logistic Regression roc_auc                     2 0.4499406
+4 Logistic Regression roc_auc                     3 0.4401616
+5 Logistic Regression roc_auc                     4 0.4498963
+6 Logistic Regression roc_auc                     5 0.4436607</code></pre>
 </div>
 </div>
 </div>
