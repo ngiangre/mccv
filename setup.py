@@ -26,7 +26,7 @@ setuptools.setup(
 	install_requires=[
 	'numpy',
 	'pandas',
-	'sklearn',
+	'scikit-learn',
 	'joblib'
 	],
 	test_suite='nose.collector',
