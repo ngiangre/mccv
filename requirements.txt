@@ -1,6 +1,5 @@
 numpy
 pandas
-sklearn
+scikit-learn
 joblib
-sys
 nbformat

@@ -1,9 +1,7 @@
 Monte Carlo Cross Validation
 ================
 
-## ⚠️ Work In Progress! ⚠️
-
-# Robust and interpretable prediction
+# Evidentiary and interpretable prediction
 
 Binary and Multi-classification algorithm for adverse outcome detection,
 survival classification, and endpoint prediction (see references for
@@ -71,26 +69,26 @@ for n in mccv_obj.mccv_data:
     [5 rows x 5 columns]
     Feature Importance
        bootstrap    feature  importance                model
-    0          0  biomarker    1.010712  Logistic Regression
-    1          0  Intercept   -0.599959  Logistic Regression
-    0          1  biomarker    0.509404  Logistic Regression
-    1          1  Intercept   -0.226465  Logistic Regression
-    0          2  biomarker    1.591529  Logistic Regression
+    0          0  biomarker    1.009705  Logistic Regression
+    1          0  Intercept   -0.598575  Logistic Regression
+    0          1  biomarker    0.509433  Logistic Regression
+    1          1  Intercept   -0.226550  Logistic Regression
+    0          2  biomarker    1.598627  Logistic Regression
     Patient Predictions
          bootstrap                model  y_pred   y_proba  y_true
     obs                                                          
-    27           0  Logistic Regression       0  0.384426       1
-    87           0  Logistic Regression       1  0.601268       0
-    3            0  Logistic Regression       0  0.401035       0
-    56           0  Logistic Regression       1  0.512297       1
-    76           0  Logistic Regression       0  0.392718       0
+    27           0  Logistic Regression       0  0.384723       1
+    87           0  Logistic Regression       1  0.601359       0
+    3            0  Logistic Regression       0  0.401320       0
+    56           0  Logistic Regression       1  0.512481       1
+    76           0  Logistic Regression       0  0.393009       0
     Performance
                      model   metric  performance_bootstrap     value
-    0  Logistic Regression  roc_auc                      0  0.468092
-    1  Logistic Regression  roc_auc                      1  0.467906
-    2  Logistic Regression  roc_auc                      2  0.481271
-    3  Logistic Regression  roc_auc                      3  0.481514
-    4  Logistic Regression  roc_auc                      4  0.476277
+    0  Logistic Regression  roc_auc                      0  0.467487
+    1  Logistic Regression  roc_auc                      1  0.467776
+    2  Logistic Regression  roc_auc                      2  0.480176
+    3  Logistic Regression  roc_auc                      3  0.480679
+    4  Logistic Regression  roc_auc                      4  0.475859
 
 ``` python
 for n in mccv_obj.mccv_permuted_data:
@@ -109,26 +107,26 @@ for n in mccv_obj.mccv_permuted_data:
     [5 rows x 5 columns]
     Feature Importance
        bootstrap    feature  importance                model
-    0          0  biomarker   -0.195845  Logistic Regression
-    1          0  Intercept    0.078774  Logistic Regression
-    0          1  biomarker   -0.630019  Logistic Regression
-    1          1  Intercept    0.238267  Logistic Regression
-    0          2  biomarker    0.165976  Logistic Regression
+    0          0  biomarker   -0.196116  Logistic Regression
+    1          0  Intercept    0.079220  Logistic Regression
+    0          1  biomarker   -0.628093  Logistic Regression
+    1          1  Intercept    0.236617  Logistic Regression
+    0          2  biomarker    0.166196  Logistic Regression
     Patient Predictions
          bootstrap                model  y_pred   y_proba  y_true
     obs                                                          
-    27           0  Logistic Regression       1  0.513434       1
-    87           0  Logistic Regression       0  0.470765       0
-    3            0  Logistic Regression       1  0.510061       0
-    56           0  Logistic Regression       0  0.488249       1
-    76           0  Logistic Regression       1  0.511744       1
+    27           0  Logistic Regression       1  0.513536       1
+    87           0  Logistic Regression       0  0.470809       0
+    3            0  Logistic Regression       1  0.510160       0
+    56           0  Logistic Regression       0  0.488317       1
+    76           0  Logistic Regression       1  0.511844       1
     Performance
                      model   metric  performance_bootstrap     value
-    0  Logistic Regression  roc_auc                      0  0.439984
-    1  Logistic Regression  roc_auc                      1  0.442234
-    2  Logistic Regression  roc_auc                      2  0.449432
-    3  Logistic Regression  roc_auc                      3  0.439897
-    4  Logistic Regression  roc_auc                      4  0.449552
+    0  Logistic Regression  roc_auc                      0  0.440616
+    1  Logistic Regression  roc_auc                      1  0.442506
+    2  Logistic Regression  roc_auc                      2  0.449941
+    3  Logistic Regression  roc_auc                      3  0.440162
+    4  Logistic Regression  roc_auc                      4  0.449896
 
 # R
 
@@ -191,30 +189,30 @@ lapply(mccv_obj$mccv_data,head)
 
     $`Feature Importance`
       bootstrap   feature importance               model
-    1         0 biomarker  1.0107122 Logistic Regression
-    2         0 Intercept -0.5999590 Logistic Regression
-    3         1 biomarker  0.5094043 Logistic Regression
-    4         1 Intercept -0.2264652 Logistic Regression
-    5         2 biomarker  1.5915295 Logistic Regression
-    6         2 Intercept -0.9376893 Logistic Regression
+    1         0 biomarker  1.0097049 Logistic Regression
+    2         0 Intercept -0.5985751 Logistic Regression
+    3         1 biomarker  0.5094328 Logistic Regression
+    4         1 Intercept -0.2265503 Logistic Regression
+    5         2 biomarker  1.5986271 Logistic Regression
+    6         2 Intercept -0.9420031 Logistic Regression
 
     $`Patient Predictions`
       bootstrap               model y_pred   y_proba y_true
-    1         0 Logistic Regression      0 0.3844259      1
-    2         0 Logistic Regression      1 0.6012685      0
-    3         0 Logistic Regression      0 0.4010353      0
-    4         0 Logistic Regression      1 0.5122970      1
-    5         0 Logistic Regression      0 0.3927179      0
-    6         0 Logistic Regression      0 0.4658372      1
+    1         0 Logistic Regression      0 0.3847230      1
+    2         0 Logistic Regression      1 0.6013587      0
+    3         0 Logistic Regression      0 0.4013202      0
+    4         0 Logistic Regression      1 0.5124811      1
+    5         0 Logistic Regression      0 0.3930090      0
+    6         0 Logistic Regression      0 0.4660667      1
 
     $Performance
                     model  metric performance_bootstrap     value
-    1 Logistic Regression roc_auc                     0 0.4680915
-    2 Logistic Regression roc_auc                     1 0.4679058
-    3 Logistic Regression roc_auc                     2 0.4812715
-    4 Logistic Regression roc_auc                     3 0.4815138
-    5 Logistic Regression roc_auc                     4 0.4762772
-    6 Logistic Regression roc_auc                     5 0.4696288
+    1 Logistic Regression roc_auc                     0 0.4674874
+    2 Logistic Regression roc_auc                     1 0.4677764
+    3 Logistic Regression roc_auc                     2 0.4801763
+    4 Logistic Regression roc_auc                     3 0.4806793
+    5 Logistic Regression roc_auc                     4 0.4758592
+    6 Logistic Regression roc_auc                     5 0.4687351
 
 ``` r
 lapply(mccv_obj$mccv_permuted_data,head)
@@ -237,30 +235,30 @@ lapply(mccv_obj$mccv_permuted_data,head)
 
     $`Feature Importance`
       bootstrap   feature  importance               model
-    1         0 biomarker -0.19584525 Logistic Regression
-    2         0 Intercept  0.07877354 Logistic Regression
-    3         1 biomarker -0.63001932 Logistic Regression
-    4         1 Intercept  0.23826705 Logistic Regression
-    5         2 biomarker  0.16597553 Logistic Regression
-    6         2 Intercept -0.01437680 Logistic Regression
+    1         0 biomarker -0.19611610 Logistic Regression
+    2         0 Intercept  0.07921951 Logistic Regression
+    3         1 biomarker -0.62809256 Logistic Regression
+    4         1 Intercept  0.23661698 Logistic Regression
+    5         2 biomarker  0.16619555 Logistic Regression
+    6         2 Intercept -0.01455491 Logistic Regression
 
     $`Patient Predictions`
       bootstrap               model y_pred   y_proba y_true
-    1         0 Logistic Regression      1 0.5134336      1
-    2         0 Logistic Regression      0 0.4707655      0
-    3         0 Logistic Regression      1 0.5100614      0
-    4         0 Logistic Regression      0 0.4882488      1
-    5         0 Logistic Regression      1 0.5117439      1
-    6         0 Logistic Regression      0 0.4972600      1
+    1         0 Logistic Regression      1 0.5135363      1
+    2         0 Logistic Regression      0 0.4708091      0
+    3         0 Logistic Regression      1 0.5101595      0
+    4         0 Logistic Regression      0 0.4883168      1
+    5         0 Logistic Regression      1 0.5118443      1
+    6         0 Logistic Regression      0 0.4973405      1
 
     $Performance
                     model  metric performance_bootstrap     value
-    1 Logistic Regression roc_auc                     0 0.4399838
-    2 Logistic Regression roc_auc                     1 0.4422338
-    3 Logistic Regression roc_auc                     2 0.4494321
-    4 Logistic Regression roc_auc                     3 0.4398971
-    5 Logistic Regression roc_auc                     4 0.4495525
-    6 Logistic Regression roc_auc                     5 0.4435271
+    1 Logistic Regression roc_auc                     0 0.4406164
+    2 Logistic Regression roc_auc                     1 0.4425061
+    3 Logistic Regression roc_auc                     2 0.4499406
+    4 Logistic Regression roc_auc                     3 0.4401616
+    5 Logistic Regression roc_auc                     4 0.4498963
+    6 Logistic Regression roc_auc                     5 0.4436607
 
 # Contribute
 
